@@ -58,7 +58,7 @@
  위의 사진은 OSU 7계층 모델로, 네트워크 통신과정을 7개의 계층으로 구분한 산업 표준 참조 모델이다.
 
  그렇지만, OSI 참조 모델은 말 그대로 참조 모델일 뿐 실제로 사용되는 인터넷 프로토콜은 현재 대부분 TCP/IP를 따른다.
- [출처 : https://velog.io/@hidaehyunlee/%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%A0%84%EB%8B%AC%EB%90%98%EB%8A%94-%EC%9B%90%EB%A6%AC-OSI-7%EA%B3%84%EC%B8%B5-%EB%AA%A8%EB%8D%B8%EA%B3%BC-TCPIP-%EB%AA%A8%EB%8D%B8]<img src="https://madplay.github.io/img/post/2018-02-04-network-tcp-udp-tcpip-1.png">
+<img src="https://madplay.github.io/img/post/2018-02-04-network-tcp-udp-tcpip-1.png">
 
  우리는 TCP/IP의 4계층 중 전송계층에 대해서만 조금 알아볼 것이다.
  TCP/IP의 전송계층에서 사용되는 프로토콜에는 TCP와 UDP가 있다. TCP와 UDP는 각각 Transmission Control Protocol, User Datagram Protocol의 약자이다. 둘 모두 패킷을 한 컴퓨터에서 다른 컴퓨터로 전달해주는 IP 프로토콜을 기반으로 구현되어 있지만, 서로 다른 특징을 가진다.
