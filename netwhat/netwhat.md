@@ -12,8 +12,7 @@
  IP주소에는 클래스라는 개념이 있음. 클래스란, 하나의 IP주소에서 네트워크 영역과 호스트 영역을 나누는 방법이자 약속. 하나의 네트워크에서 몇개의 호스트 IP를 가질 수 있는지에 따라 클래스를 나눌 수 있다.
 
  IP 클래스는 아래와 같이 구분됨.
- <img src="https://t1.daumcdn.net/cfile/tistory/99068D495BE8101D34">
- <출처 : https://velog.io/@hidaehyunlee/IP-address%EB%9E%80>
+ ![출처 : https://velog.io/@hidaehyunlee/IP-address%EB%9E%80]<img src="https://t1.daumcdn.net/cfile/tistory/99068D495BE8101D34">
 
  위 사진을 보면 Network address, host adress와 같은 말이 나오는데, 앞으로 나올 subnet mask, IP주소의 범위 등을 알기 위해서 Network address부터 천천히 알아보자.
 
@@ -24,12 +23,11 @@
   서브넷 마스크에 대해 알아보려면 다시 위의 IPv4를 떠올려야 한다. IPv4는 초기에 클래스를 통해 주소를 할당하는 방법을 택했다고 한다. 예를 들어, 어떤 기업에 B클래스를 할당했다고 하자. B클래스에서는 host address로 0.0 ~ 255.255의 범위를 사용할 수 있으니 약 65000(2^16)여개의 주소를 사용할 수 있다. 그런데 기업에서 그 중 1만개 정도의 IP만 사용한다면 나머지 약 5만개의 IP는 쓰이지 않은 채로 남는다. 그러자고 클래스 C를 할당하자니 기업의 IP자원이 너무 부족하게 된다.
 
   이러한 문제를 해결하기 위해 서브넷이 등장했다. 서브넷은 말 그대로 부분망이라는 뜻으로, IP주소에서 네트워크 영역을 부분적으로 나눈 부분 네트워크를 뜻한다. 이미지로 보면 아래와 같다.
-  <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F99CC58465BF1066636A1C8">
-  <출처 : http://korean-daeddo.blogspot.com/2016/01/blog-post_26.html>
+  ![출처 : http://korean-daeddo.blogspot.com/2016/01/blog-post_26.html]<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F99CC58465BF1066636A1C8">
   
   다음은 각 IP 클래스들의 기본 서브넷이다.
-  <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile21.uf.tistory.com%2Fimage%2F99E05F505BF1086C336D68">
-  <출처 : https://engkimbs.tistory.com/622>
+  ![출처 : https://engkimbs.tistory.com/622]<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile21.uf.tistory.com%2Fimage%2F99E05F505BF1086C336D68">
+  
   예를 들어, 클래스 A의 IP가 116.81.97.8일 때, A의 서브넷 마스크는 255.0.0.0이므로 이 둘을 이진수로 변환하고 AND연산을 수행하면,
   116. 81. 97. 0->01110100.01010001.01100001.00001000
   255.  0.  0. 0->11111111.00000000.00000000.00000000
@@ -56,17 +54,14 @@
  
  데이터는 어떻게 전송될까? 컴퓨터는 0과 1을 사용한다. 0과 1로 구성된 아주 긴 전기신호인 것이다. 그럼 이러한 전기신호를 보내면 물 흐르듯 전송되느냐 하면 그건 아니다. 한 컴퓨터 혹은 스마트폰 등에서 발생한 데이터 상대방 컴퓨터나 서버로 전송되기 위해서는 표준화된 규격(프로토콜)이 필요하다. 컴퓨터 간 데이터를 주고받을 때 에러가 발생하지 않도록 알맞게 나누어 전송하고, 수신하는 쪽에서 다시 기존의 정보로 변환하는 과정은 어떻게 약속되어 있을까.
 
- <img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F25303F355755856B02">
- <출처 : https://velog.io/@hidaehyunlee/%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%A0%84%EB%8B%AC%EB%90%98%EB%8A%94-%EC%9B%90%EB%A6%AC-OSI-7%EA%B3%84%EC%B8%B5-%EB%AA%A8%EB%8D%B8%EA%B3%BC-TCPIP-%EB%AA%A8%EB%8D%B8>
+ ![출처 : https://velog.io/@hidaehyunlee/%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%A0%84%EB%8B%AC%EB%90%98%EB%8A%94-%EC%9B%90%EB%A6%AC-OSI-7%EA%B3%84%EC%B8%B5-%EB%AA%A8%EB%8D%B8%EA%B3%BC-TCPIP-%EB%AA%A8%EB%8D%B8]<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F25303F355755856B02">
  위의 사진은 OSU 7계층 모델로, 네트워크 통신과정을 7개의 계층으로 구분한 산업 표준 참조 모델이다.
 
  그렇지만, OSI 참조 모델은 말 그대로 참조 모델일 뿐 실제로 사용되는 인터넷 프로토콜은 현재 대부분 TCP/IP를 따른다.
- <img src="https://madplay.github.io/img/post/2018-02-04-network-tcp-udp-tcpip-1.png">
- <출처 : https://velog.io/@hidaehyunlee/%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%A0%84%EB%8B%AC%EB%90%98%EB%8A%94-%EC%9B%90%EB%A6%AC-OSI-7%EA%B3%84%EC%B8%B5-%EB%AA%A8%EB%8D%B8%EA%B3%BC-TCPIP-%EB%AA%A8%EB%8D%B8>
+ ![출처 : https://velog.io/@hidaehyunlee/%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%A0%84%EB%8B%AC%EB%90%98%EB%8A%94-%EC%9B%90%EB%A6%AC-OSI-7%EA%B3%84%EC%B8%B5-%EB%AA%A8%EB%8D%B8%EA%B3%BC-TCPIP-%EB%AA%A8%EB%8D%B8]<img src="https://madplay.github.io/img/post/2018-02-04-network-tcp-udp-tcpip-1.png">
 
  우리는 TCP/IP의 4계층 중 전송계층에 대해서만 조금 알아볼 것이다.
  TCP/IP의 전송계층에서 사용되는 프로토콜에는 TCP와 UDP가 있다. TCP와 UDP는 각각 Transmission Control Protocol, User Datagram Protocol의 약자이다. 둘 모두 패킷을 한 컴퓨터에서 다른 컴퓨터로 전달해주는 IP 프로토콜을 기반으로 구현되어 있지만, 서로 다른 특징을 가진다.
- <img src="https://image.slidesharecdn.com/tcp-150426214109-conversion-gate01/95/tcp-22-1024.jpg?cb=1430085440">
- <출처 : https://velog.io/@hidaehyunlee/TCP-%EC%99%80-UDP-%EC%9D%98-%EC%B0%A8%EC%9D%B4>
+ ![출처 : https://velog.io/@hidaehyunlee/TCP-%EC%99%80-UDP-%EC%9D%98-%EC%B0%A8%EC%9D%B4]<img src="https://image.slidesharecdn.com/tcp-150426214109-conversion-gate01/95/tcp-22-1024.jpg?cb=1430085440">
  간단히 비교하면 위의 그림과 같은 특징을 지닌다.
  TCP는 연결지향적이고, 순서를 보장하며 상대적으로 느리다. 신뢰성 있는 데이터 전송에 사용되며, 일 대 일 통신에 사용된다. UDP는 확인하는 과정이 없어 속도가 빠르지만 신뢰도가 낮다. 일 대 일, 일 대 다, 다 대 다 통신에 사용된다.
