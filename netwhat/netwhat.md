@@ -55,9 +55,11 @@
  데이터는 어떻게 전송될까? 컴퓨터는 0과 1을 사용한다. 0과 1로 구성된 아주 긴 전기신호인 것이다. 그럼 이러한 전기신호를 보내면 물 흐르듯 전송되느냐 하면 그건 아니다. 한 컴퓨터 혹은 스마트폰 등에서 발생한 데이터 상대방 컴퓨터나 서버로 전송되기 위해서는 표준화된 규격(프로토콜)이 필요하다. 컴퓨터 간 데이터를 주고받을 때 에러가 발생하지 않도록 알맞게 나누어 전송하고, 수신하는 쪽에서 다시 기존의 정보로 변환하는 과정은 어떻게 약속되어 있을까.
 
  [출처 : https://velog.io/@hidaehyunlee/%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%A0%84%EB%8B%AC%EB%90%98%EB%8A%94-%EC%9B%90%EB%A6%AC-OSI-7%EA%B3%84%EC%B8%B5-%EB%AA%A8%EB%8D%B8%EA%B3%BC-TCPIP-%EB%AA%A8%EB%8D%B8]<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F25303F355755856B02">
+ 
  위의 사진은 OSU 7계층 모델로, 네트워크 통신과정을 7개의 계층으로 구분한 산업 표준 참조 모델이다.
 
  그렇지만, OSI 참조 모델은 말 그대로 참조 모델일 뿐 실제로 사용되는 인터넷 프로토콜은 현재 대부분 TCP/IP를 따른다.
+ 
 <img src="https://madplay.github.io/img/post/2018-02-04-network-tcp-udp-tcpip-1.png">
 
  우리는 TCP/IP의 4계층 중 전송계층에 대해서만 조금 알아볼 것이다.
