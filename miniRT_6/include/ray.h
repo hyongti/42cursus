@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 15:31:25 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/11/29 15:34:03 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/12/02 10:59:05 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/12/02 15:23:37 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef RAY_H
+# define RAY_H
 
 #include "vec.h"
 
-void	write_color(t_vec vec);
+typedef struct  s_ray
+{
+    t_point     origin;
+    t_vec       dir;
+}               t_ray;
+
+t_point		    at(double t, t_ray ray);
+t_ray	        ray(t_point orig, t_vec dir);
 
 #endif

@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.h                                              :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 16:55:11 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/11/30 20:05:21 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/12/02 10:59:28 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/12/02 15:23:18 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HIT_H
-# define HIT_H
+#include "ray.h"
 
-#include "vec.h"
-#include "useful_nbr.h"
-
-typedef struct	s_sphere
+t_point		at(double t, t_ray ray)
 {
-	t_vec		center;
-	double		radius;
-}				t_sphere;
+	t_point at;
 
-typedef struct	s_record
+	at = v_plus(ray.origin, v_multiply(ray.dir, t));
+	return (at);
+}
+
+t_ray		ray(t_point orig, t_vec dir)
 {
-	double		t;
-	t_vec		p;
-	t_vec		normal;
-}				t_record;
+	t_ray ray;
 
-int		hit_sphere(t_vec origin, t_vec ray, t_sphere sphere, t_record *record);
-void	set_face_normal(t_vec *ray, t_record *rec);
-
-#endif
+	ray.origin = orig;
+	ray.dir = dir;
+	return (ray);
+}

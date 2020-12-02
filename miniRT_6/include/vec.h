@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/28 16:07:27 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/11/30 19:32:36 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/12/02 10:50:05 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/12/02 13:09:33 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ typedef struct	s_vec
 	double		y;
 	double		z;
 }				t_vec;
+
+typedef t_vec	t_point;
+typedef t_vec	t_color;
 
 void	input_elements(t_vec *vec, double x, double y, double z);
 t_vec	v_plus(t_vec vec1, t_vec vec2);

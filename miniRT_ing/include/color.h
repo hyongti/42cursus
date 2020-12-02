@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_face_normal.c                                  :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 19:58:48 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/11/30 20:00:57 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/12/02 10:52:47 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/12/02 17:14:43 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hit.h"
+#ifndef COLOR_H
+# define COLOR_H
 
-void	set_face_normal(t_vec *ray, t_record *rec)
-{
-    if (v_dot(*ray, rec->normal) > 0.0)
-        v_multiply(rec->normal, -1.0);
-    else
-        return;
-}
+#include "vec.h"
+
+void	write_color(t_vec vec);
+t_color color(double x, double y, double z);
+
+#endif
