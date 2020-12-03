@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/03 15:09:07 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2020/12/03 15:30:37 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_color		ray_color(t_ray r, t_hittable_list *world, int depth)
 	t_vec			unit_direction;
 	
 	rec.t_max = INFINITY;
-	rec.t_min = 0;
+	rec.t_min = 0.001;
 	if (depth <= 0)
 		return (color(0, 0, 0));
 	if (hit_list(r, world, &rec))
