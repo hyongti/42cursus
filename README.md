@@ -7,4 +7,3 @@
 #### [netwhat](./netwhat)
 
 #### [miniRT](./miniRT)
-##### - [ray_tracing_in_one_weekend_in_C](./miniRT/ray_tracing_in_one_weekend_in_C)
