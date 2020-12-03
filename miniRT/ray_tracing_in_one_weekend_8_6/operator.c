@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:49:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/03 14:57:10 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2020/12/03 16:31:41 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,27 @@ t_vec		random_in_unit_sphere(void)
 		else
 			return (p);
 	}
+}
+
+t_vec		random_unit_vector(void)
+{
+	double	a;
+	double	z;
+	double	r;
+
+	a = random_double2(0, 2 * PI);
+	z = random_double2(-1, 1);
+	r = sqrt(1 - z * z);
+	return (vec(r * cos(a), r * sin(a), z));
+}
+
+t_vec		random_in_hemisphere(t_vec normal)
+{
+	t_vec	in_unit_sphere;
+	
+	in_unit_sphere = random_in_unit_sphere();
+	if (v_dot(in_unit_sphere, normal) > 0.0)
+		return (in_unit_sphere);
+	else
+		return(v_multiply(in_unit_sphere, -1));	
 }

@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:50:05 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/03 15:39:50 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2020/12/03 16:32:50 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ t_vec			random_vec(void);
 t_vec			random_vec2(double min, double max);
 t_vec			random_in_unit_sphere(void);
 t_vec			random_unit_vector(void);
+t_vec			random_in_hemisphere(t_vec normal);
 
 #endif

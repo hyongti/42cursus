@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/03 11:04:33 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2020/12/03 16:32:58 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ double		hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
 		return (FALSE);
 	else
 	{
-//		printf("test test test test test test\n");
 		sqrtd = sqrt(discriminant);
 		root = (-b - sqrtd) / a;
 		if (root < rec->t_min || root > rec->t_max)
 		{
-//			printf("test test test test test test\n");
 			root = (-b + sqrtd) / a;
 			if (root < rec->t_min || root > rec->t_max)
 				return (FALSE);
@@ -55,7 +53,6 @@ double		hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
 		rec->t = root;
 		rec->p = at(rec->t, r);
 		rec->normal = v_multiply(v_minus(rec->p, sphere->center), 1 / sphere->radius);
-		//printf("%f\n", v_dot(r.dir, rec->normal));
 		set_face_normal(r, rec);
 		return (TRUE);
 	}
@@ -92,17 +89,25 @@ int			hit_list(t_ray r, t_hittable_list *world, t_hit_record *rec)
 	return (hit_anything);
 }
 
-t_color		ray_color(t_ray r, t_hittable_list *world)
+t_color		ray_color(t_ray r, t_hittable_list *world, int depth)
 {
 	t_hit_record	rec;
+	t_point			target;
 	double			t;
 	t_vec			unit_direction;
 	
 	rec.t_max = INFINITY;
-	rec.t_min = 0;
+	rec.t_min = 0.001;
+	if (depth <= 0)
+		return (color(0, 0, 0));
 	if (hit_list(r, world, &rec))
-		return (v_multiply(v_plus(rec.normal, color(1, 1, 1)), 0.5));
+	{
+		//target = v_plus(v_plus(rec.p, rec.normal), random_in_unit_sphere());
+		//target = v_plus(v_plus(rec.p, rec.normal), random_unit_vector());
+		target = v_plus(rec.p, random_in_hemisphere(rec.normal));
+		return (v_multiply(ray_color(ray(rec.p, v_minus(target, rec.p)), world, depth - 1), 0.5));
+	}
 	unit_direction = v_normalize(r.dir);
 	t = 0.5 * (unit_direction.y + 1.0);
 	return (v_plus(v_multiply(color(1.0, 1.0, 1.0), (1.0 - t)), v_multiply(color(0.5, 0.7, 1.0), t)));
-}
+}	
