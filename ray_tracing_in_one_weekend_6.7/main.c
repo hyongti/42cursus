@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:09:12 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/02 21:01:02 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2020/12/03 08:50:32 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			main()
 	t_hittable_list		*world;
 	world = NULL;
 	h_lstadd_back(&world, h_lstnew(SP, sphere(point(0, 0, -1), 0.5)));
-	//h_lstadd_back(&world, h_lstnew(SP, sphere(point(0, -100.5, -1), 100)));
+	h_lstadd_back(&world, h_lstnew(SP, sphere(point(0, -100.5, -1), 100)));
 
 	//Render
 	int			i;
