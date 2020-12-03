@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# 이건 뭐라고 해야 하지?
+.DS_store
