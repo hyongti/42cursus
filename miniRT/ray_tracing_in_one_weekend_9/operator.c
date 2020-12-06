@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:49:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/06 18:14:59 by root             ###   ########.fr       */
+/*   Updated: 2020/12/06 18:27:16 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_vec	v_multiply(t_vec vec1, double f)
 	return (result);
 }
 
-t_vec	v_multiply(t_vec vec1, t_vec vec2)
+t_vec	v_multiply2(t_vec vec1, t_vec vec2)
 {
 	vec1.x *= vec2.x;
 	vec1.y *= vec2.y;

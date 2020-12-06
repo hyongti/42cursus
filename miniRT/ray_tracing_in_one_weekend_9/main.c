@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:09:12 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/04 16:21:15 by root             ###   ########.fr       */
+/*   Updated: 2020/12/06 19:21:04 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 #include "ray.h"
 #include "color.h"
 #include "hittable.h"
-#include "hittable_list.h"
-#include "sphere.h"
 #include "random.h"
 #include "camera.h"
-#include "material.h"
 
 int			main()
 {

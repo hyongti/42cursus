@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:50:05 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/03 16:32:50 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2020/12/06 18:27:26 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_vec			vec(double x, double y, double z);
 t_vec			v_plus(t_vec vec1, t_vec vec2);
 t_vec			v_minus(t_vec vec1, t_vec vec2);
 t_vec			v_multiply(t_vec vec1, double f);
+t_vec			v_multiply2(t_vec vec1, t_vec vec2);
 t_vec			v_normalize(t_vec vec);
 t_vec			v_cross(t_vec vec1, t_vec vec2);
 double			v_dot(t_vec vec1, t_vec vec2);
@@ -48,5 +49,6 @@ t_vec			random_vec2(double min, double max);
 t_vec			random_in_unit_sphere(void);
 t_vec			random_unit_vector(void);
 t_vec			random_in_hemisphere(t_vec normal);
+t_vec			reflect(t_vec v, t_vec n);
 
 #endif

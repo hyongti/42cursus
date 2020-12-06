@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/06 18:13:21 by root             ###   ########.fr       */
+/*   Updated: 2020/12/06 19:21:41 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ double		hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
 		rec->t = root;
 		rec->p = at(rec->t, r);
 		rec->normal = v_multiply(v_minus(rec->p, sphere->center), 1 / sphere->radius);
+		rec->material.mat_kind = sphere->material.mat_kind;
+		rec->material.albedo = sphere->material.albedo;
 		set_face_normal(r, rec);
 		return (TRUE);
 	}
@@ -109,7 +111,7 @@ t_color		ray_color(t_ray r, t_hittable_list *world, int depth)
 
 		// target = v_plus(rec.p, random_in_hemisphere(rec.normal));
 		// return (v_multiply(ray_color(ray(rec.p, v_minus(target, rec.p)), world, depth - 1), 0.5));
-		
+		// printf("test test test\n");
 		if (scatter(r, &rec, &attenuation, &scattered))
 			return (v_multiply2(attenuation, ray_color(scattered, world, depth - 1)));
 		return (color(0, 0, 0));

@@ -6,11 +6,11 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:36:07 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/04 16:22:58 by root             ###   ########.fr       */
+/*   Updated: 2020/12/06 18:45:15 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hittable_list.h"
+#include "hittable.h"
 
 t_hittable_list		*h_lstnew(int obj_type, void *object)
 {
