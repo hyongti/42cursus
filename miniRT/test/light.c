@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.h                                          :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/02 18:35:31 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/09 21:28:39 by hyongti          ###   ########.fr       */
+/*   Created: 2020/12/09 20:11:05 by hyongti           #+#    #+#             */
+/*   Updated: 2020/12/09 20:13:10 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECTS_H
-# define OBJECTS_H
+#include "light.h"
 
-#include "make_object.h"
-
-# define LIGHT 0
-# define SP 1
-# define PL 2
-# define TR 3
-
-typedef struct	s_objects
+t_light		*light(t_point point, t_color color)
 {
-	int			type;
-	void		*object;
-	void		*next;
-}				t_objects;
+	t_light	*light;
 
-t_objects		*objects_new(int obj_type, void *object);
-t_objects		*objects_last(t_objects *lst);
-void			objects_add_back(t_objects **lst, t_objects *new);
-
-#endif
+	if (!(light = (t_light *)malloc(sizeof(t_light))))
+		return (0);
+	light->point = point;
+	light->color = color;
+	return (light);
+}

@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.h                                          :+:      :+:    :+:   */
+/*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/02 18:35:31 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/09 21:28:39 by hyongti          ###   ########.fr       */
+/*   Created: 2020/12/09 20:08:37 by hyongti           #+#    #+#             */
+/*   Updated: 2020/12/09 20:11:29 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECTS_H
-# define OBJECTS_H
+#ifndef LIGHT_H
+# define LIGHT_H
 
-#include "make_object.h"
+#include "vector_utils.h"
 
-# define LIGHT 0
-# define SP 1
-# define PL 2
-# define TR 3
-
-typedef struct	s_objects
+typedef struct	s_light
 {
-	int			type;
-	void		*object;
-	void		*next;
-}				t_objects;
+	t_point		point;
+	t_color		color;
+}				t_light;
 
-t_objects		*objects_new(int obj_type, void *object);
-t_objects		*objects_last(t_objects *lst);
-void			objects_add_back(t_objects **lst, t_objects *new);
+t_light		*light(t_point poin, t_color color);
 
 #endif

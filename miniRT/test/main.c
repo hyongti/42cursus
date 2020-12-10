@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:09:12 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/08 21:20:57 by root             ###   ########.fr       */
+/*   Updated: 2020/12/09 23:23:30 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "color.h"
 #include "hit.h"
 #include "objects.h"
-#include "sphere.h"
+#include "make_object.h"
 
 int			main()
 {
 	// Image
 	double		ratio = 16.0 / 9.0;
-	int			image_width = 1200;
+	int			image_width = 1920;
 	int			image_height = (int)(image_width / ratio);
 
 	// Camera
@@ -45,12 +45,17 @@ int			main()
 	t_objects	*objects;
 	objects = NULL;
 	// objects_add_back(&objects, objects_new(SP, sphere(point(0, 1, -5), 1, color(1, 1, 1))));
-	t_sphere	*light;
-
-	light = sphere(point(0, 5, -7), 0.1, color(1, 1, 1));
-	objects_add_back(&objects, objects_new(SP, sphere(point(0, -1, -10), 3.5, color(1, 0, 0))));
-	objects_add_back(&objects, objects_new(SP, sphere(point(7, -1, -15), 3.0, color(0, 1, 0))));
 	
+	// light = sphere(point(0, 5, -7), 0.1, color(1, 1, 1));
+	objects_add_back(&objects, objects_new(SP, sphere(point(0, 0, -2), 0.5, color(1, 0, 0))));
+	objects_add_back(&objects, objects_new(LIGHT, light(point(3, 3, 0), color(0.5, 1, 1))));
+	objects_add_back(&objects, objects_new(LIGHT, light(point(0, 3, 0), color(0.5, 1, 1))));
+	// objects_add_back(&objects, objects_new(LIGHT, light(point(5, -5, -7), color(1, 1, 1))));
+	// objects_add_back(&objects, objects_new(LIGHT, light(point(-5, 5, -7), color(1, 1, 1))));
+	// objects_add_back(&objects, objects_new(LIGHT, light(point(-5, -5, -7), color(1, 1, 1))));
+	// objects_add_back(&objects, objects_new(SP, sphere(point(7, -1, -15), 3.0, color(0, 1, 0))));
+	// objects_add_back(&objects, objects_new(PL, sphere(point(7, -1, -15), 3.0, color(0, 1, 0))));
+	objects_add_back(&objects, objects_new(TR, triangle(point(-5, -3, -10), point(10, -3, -20), point(3, 5, -15), color(0.2, 0.2, 0.2))));	
 	//Render
 	int			i;
 	int			j = image_height - 1;
@@ -69,7 +74,7 @@ int			main()
 			v = (double)j / (image_height - 1);
 			r = ray(origin, v_minus(v_plus(v_plus(lower_left_corner, 
 					v_multiply(horizontal, u)), v_multiply(vertical, v)), origin));
-			pixel_color = ray_color(r, objects, light);
+			pixel_color = ray_color(r, objects);
 			write_color(pixel_color);
 			++i;
 		}

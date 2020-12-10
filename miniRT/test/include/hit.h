@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 14:40:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/08 19:47:46 by root             ###   ########.fr       */
+/*   Updated: 2020/12/09 22:57:25 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@
 #include "ray.h"
 #include "color.h"
 #include "hit.h"
+#include "light.h"
 #include "objects.h"
 
 # define TRUE 1
 # define FALSE 0
-
-# define MAX(a, b) (((a) > (b)) ? (a) : (b))
-# define MIN(a, b) (((a) < (b)) ? (a) : (b))
 
 typedef struct	s_hit_record
 {
@@ -35,12 +33,14 @@ typedef struct	s_hit_record
 	double		t_min;
 	double		t_max;
 	t_sphere	sphere;
+	int			type;
 }				t_hit_record;
 
 void		set_face_normal(t_ray r, t_hit_record *rec);
-double		hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec);
+int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec);
+int			hit_triangle(t_ray r, t_triangle *triangle, t_hit_record *rec);
 int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec);
 int			hit(t_ray r, t_objects *objects, t_hit_record *rec);
-t_color		ray_color(t_ray r, t_objects *objects, t_sphere *light);
+t_color		ray_color(t_ray r, t_objects *objects);
 
 #endif
