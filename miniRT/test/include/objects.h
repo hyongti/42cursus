@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:35:31 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/09 21:28:39 by hyongti          ###   ########.fr       */
+/*   Updated: 2020/12/10 20:42:41 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define SP 1
 # define PL 2
 # define TR 3
+# define CY 4
 
 typedef struct	s_objects
 {

@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:50:05 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/08 20:11:37 by root             ###   ########.fr       */
+/*   Updated: 2020/12/10 21:04:46 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_vec	v_multiply_2(t_vec vec1, t_vec vec2);
 t_vec	v_normalize(t_vec vec);
 t_vec	v_cross(t_vec vec1, t_vec vec2);
 double	v_dot(t_vec vec1, t_vec vec2);
+double	v_len_squared(t_vec vec);
 double	v_len(t_vec vec);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/09 23:21:07 by hyongti          ###   ########.fr       */
+/*   Updated: 2020/12/11 15:24:37 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,92 +23,6 @@ void		set_face_normal(t_ray r, t_hit_record *rec)
 	}
 }
 
-int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
-{
-	t_vec	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-	double	sqrtd;
-	double	root;
-
-	oc = v_minus(r.origin, sphere->center);
-	a = v_dot(r.dir, r.dir);
-	b = v_dot(oc, r.dir);
-	c = v_dot(oc, oc) - sphere->radius * sphere->radius;
-	discriminant = b * b - a * c;
-	if (discriminant < 0)
-		return (FALSE);
-	else
-	{
-//		printf("test test test test test test\n");
-		sqrtd = sqrt(discriminant);
-		root = (-b - sqrtd) / a;
-		if (root < rec->t_min || root > rec->t_max)
-		{
-//			printf("test test test test test test\n");
-			root = (-b + sqrtd) / a;
-			if (root < rec->t_min || root > rec->t_max)
-				return (FALSE);
-		}
-		rec->t = root;
-		rec->p = at(rec->t, r);
-		rec->normal = v_multiply(v_minus(rec->p, sphere->center), 1 / sphere->radius);
-		rec->sphere.center = sphere->center;
-		rec->color = sphere->color;
-		rec->type = SP;
-		//printf("%f\n", v_dot(r.dir, rec->normal));
-		set_face_normal(r, rec);
-		return (TRUE);
-	}
-}
-
-int			hit_triangle(t_ray r, t_triangle *triangle, t_hit_record *rec)
-{
-	rec->normal = v_cross(v_minus(triangle->p1, triangle->p2), v_minus(triangle->p1, triangle->p3));
- 	set_face_normal(r, rec);
-	
-	t_vec	c;
-
-	double	d = v_dot(rec->normal, triangle->p1);
-
-	double	root = (v_dot(rec->normal, r.origin) + d) / v_dot(rec->normal, r.dir);
-	if (root < 0)
-		return (FALSE);
-	// printf("test1111111\n");
-	
-	t_point p = at(root, r);
-
-	t_vec edge1 = v_minus(triangle->p2, triangle->p1);
-	t_vec p_p1 = v_minus(p, triangle->p1);
-	c = v_cross(edge1, p_p1);
-	if (v_dot(rec->normal, c) < 0)
-		return (FALSE);
-	// printf("test2222222222\n");
-	t_vec edge2 = v_minus(triangle->p3, triangle->p2);
-	t_vec p_p2 = v_minus(p, triangle->p2);
-	c = v_cross(edge2, p_p2);
-	if (v_dot(rec->normal, c) < 0)
-		return (FALSE);
-	// printf("test3333333333\n");
-	t_vec edge3 = v_minus(triangle->p1, triangle->p3);
-	t_vec p_p3 = v_minus(p, triangle->p3);
-	c = v_cross(edge3, p_p3);
-	if (v_dot(rec->normal, c) < 0)
-		return (FALSE);
-	// printf("test44444444444\n");
-
-	if (root < rec->t_min || root > rec->t_max)
-		return (FALSE);
-	rec->p = p;
-	rec->type = TR;
-	rec->t = root;
-	rec->color = triangle->color;
-	return (TRUE);
-}
-
-
 int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec)
 {
 	int		hit_result;
@@ -120,6 +34,11 @@ int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec)
 		hit_result = FALSE;
 	else if (objects->type == TR)
 		hit_result = hit_triangle(r, (t_triangle *)objects->object, rec);
+	else if (objects->type == CY)
+	{
+		// printf("test test test test test test\n");
+		hit_result = hit_cylinder(r, (t_cylinder *)objects->object, rec);
+	}
 	return (hit_result);
 
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_object.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:34:00 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/09 21:17:07 by hyongti          ###   ########.fr       */
+/*   Updated: 2020/12/11 15:33:17 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,18 @@ t_triangle	*triangle(t_point a, t_point b, t_point c, t_color color)
 	triangle->p3 = c;
 	triangle->color = color;
 	return (triangle);
+}
+
+t_cylinder	*cylinder(t_point p, t_vec cen_vec, t_color color, double radius, double len)
+{
+	t_cylinder	*cylinder;
+
+	if (!(cylinder = (t_cylinder *)malloc(sizeof(t_cylinder))))
+		return (0);
+	cylinder->p = p;
+	cylinder->center_vec = cen_vec;
+	cylinder->color = color;
+	cylinder->radius = radius;
+	cylinder->len = len;
+	return (cylinder);
 }

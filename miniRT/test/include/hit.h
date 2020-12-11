@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 14:40:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/09 22:57:25 by hyongti          ###   ########.fr       */
+/*   Updated: 2020/12/11 15:15:24 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_hit_record
 void		set_face_normal(t_ray r, t_hit_record *rec);
 int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec);
 int			hit_triangle(t_ray r, t_triangle *triangle, t_hit_record *rec);
+int			hit_cylinder(t_ray r, t_cylinder *cylinder, t_hit_record *rec);
 int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec);
 int			hit(t_ray r, t_objects *objects, t_hit_record *rec);
 t_color		ray_color(t_ray r, t_objects *objects);

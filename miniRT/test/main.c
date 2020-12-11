@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:09:12 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/09 23:23:30 by hyongti          ###   ########.fr       */
+/*   Updated: 2020/12/11 15:49:18 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			main()
 {
 	// Image
 	double		ratio = 16.0 / 9.0;
-	int			image_width = 1920;
+	int			image_width = 1280;
 	int			image_height = (int)(image_width / ratio);
 
 	// Camera
@@ -48,14 +48,17 @@ int			main()
 	
 	// light = sphere(point(0, 5, -7), 0.1, color(1, 1, 1));
 	objects_add_back(&objects, objects_new(SP, sphere(point(0, 0, -2), 0.5, color(1, 0, 0))));
-	objects_add_back(&objects, objects_new(LIGHT, light(point(3, 3, 0), color(0.5, 1, 1))));
-	objects_add_back(&objects, objects_new(LIGHT, light(point(0, 3, 0), color(0.5, 1, 1))));
+	objects_add_back(&objects, objects_new(SP, sphere(point(2, 2, -5), 1, color(1, 0, 1))));
+	// objects_add_back(&objects, objects_new(LIGHT, light(point(3, 3, 0), color(1, 1, 1))));
+	objects_add_back(&objects, objects_new(LIGHT, light(point(0, 3, 0), color(1, 1, 1))));
 	// objects_add_back(&objects, objects_new(LIGHT, light(point(5, -5, -7), color(1, 1, 1))));
 	// objects_add_back(&objects, objects_new(LIGHT, light(point(-5, 5, -7), color(1, 1, 1))));
 	// objects_add_back(&objects, objects_new(LIGHT, light(point(-5, -5, -7), color(1, 1, 1))));
 	// objects_add_back(&objects, objects_new(SP, sphere(point(7, -1, -15), 3.0, color(0, 1, 0))));
 	// objects_add_back(&objects, objects_new(PL, sphere(point(7, -1, -15), 3.0, color(0, 1, 0))));
-	objects_add_back(&objects, objects_new(TR, triangle(point(-5, -3, -10), point(10, -3, -20), point(3, 5, -15), color(0.2, 0.2, 0.2))));	
+	objects_add_back(&objects, objects_new(TR, triangle(point(-5, -3, -10), point(10, -3, -20), point(3, 5, -15), color(0, 0, 1))));
+	objects_add_back(&objects, objects_new(CY, cylinder(point(-3, -2, -5), vec(0, 0, 1), color(0, 1, 0), 0.5, 4)));
+	objects_add_back(&objects, objects_new(CY, cylinder(point(3, -1, -5), vec(0, 1, 1), color(1, 1, 0), 1, 3)));
 	//Render
 	int			i;
 	int			j = image_height - 1;
