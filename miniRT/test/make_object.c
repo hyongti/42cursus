@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:34:00 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/11 15:33:17 by root             ###   ########.fr       */
+/*   Updated: 2020/12/11 17:21:08 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,3 +62,15 @@ t_cylinder	*cylinder(t_point p, t_vec cen_vec, t_color color, double radius, dou
 	cylinder->len = len;
 	return (cylinder);
 }
+
+// t_plane		*plane(t_point p, t_vec normal, t_color color)
+// {
+// 	t_plane		*plane;
+
+// 	if (!(plane = (t_plane *)malloc(sizeof(t_plane))))
+// 		return (0);
+// 	plane->point = p;
+// 	plane->normal = normal;
+// 	plane->color = color;
+// 	return (plane);
+// }

@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:45:23 by root              #+#    #+#             */
-/*   Updated: 2020/12/11 15:49:49 by root             ###   ########.fr       */
+/*   Updated: 2020/12/12 18:14:06 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
 		rec->t = root;
 		rec->p = at(rec->t, r);
 		rec->normal = v_multiply(v_minus(rec->p, sphere->center), 1 / sphere->radius);
-		rec->sphere.center = sphere->center;
+		// rec->sphere.center = sphere->center;
 		rec->color = sphere->color;
 		//printf("%f\n", v_dot(r.dir, rec->normal));
 		set_face_normal(r, rec);
@@ -156,4 +156,43 @@ int			hit_cylinder(t_ray r, t_cylinder *cylinder, t_hit_record *rec)
 		set_face_normal(r, rec);
 		return (TRUE);
 	}
+}
+
+int		hit_plane(t_ray r, t_plane *plane, t_hit_record *rec)
+{
+	double	denom;
+	double	t;
+	t_vec	to_hit;
+
+	if (v_dot(plane->normal, v_normalize(r.dir)) < 0)
+		plane->normal = v_multiply(plane->normal, -1);
+	denom = v_dot(plane->normal, v_normalize(r.dir));
+	// printf("denom : %f\n", denom);
+	// printf("1e-6 : %f\n", 1e-6);
+	if (denom > 1e-6)
+	{
+		to_hit = v_minus(plane->point, r.origin);
+		t = v_dot(to_hit, plane->normal);
+		// printf("t : %f\n", t);
+		if (t < rec->t_min || t > rec->t_max)
+		{
+			// printf("1111111111111111\n");
+			return (FALSE);
+		}
+	}
+	else
+	{
+		// printf("22222222222222222222222222222\n");
+		return (FALSE);
+	}
+	// printf("3333333333333333333333\n");
+	rec->t = t;
+	rec->p = at(rec->t, r);
+	rec->normal = plane->normal;
+	// rec->normal = plane->normal;
+	// rec->sphere.center = sphere->center;
+	rec->color = plane->color;
+	//printf("%f\n", v_dot(r.dir, rec->normal));
+	set_face_normal(r, rec);
+	return (TRUE);
 }

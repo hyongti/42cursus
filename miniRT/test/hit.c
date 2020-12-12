@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/11 15:24:37 by root             ###   ########.fr       */
+/*   Updated: 2020/12/11 17:22:22 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec)
 		// printf("test test test test test test\n");
 		hit_result = hit_cylinder(r, (t_cylinder *)objects->object, rec);
 	}
+	else if (objects->type == PL)
+		hit_result = hit_plane(r, (t_plane *)objects->object, rec);
 	return (hit_result);
 
 }
