@@ -6,11 +6,22 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:45:23 by root              #+#    #+#             */
-/*   Updated: 2020/12/12 18:14:06 by root             ###   ########.fr       */
+/*   Updated: 2020/12/14 21:45:46 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hit.h"
+
+void		set_face_normal(t_ray r, t_hit_record *rec)
+{
+	if (v_dot(r.dir, rec->normal) < 0)
+		rec->front_face = TRUE;
+	else
+	{
+		rec->normal = v_multiply(rec->normal, -1);
+		rec->front_face = FALSE;
+	}
+}
 
 int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
 {
@@ -54,43 +65,78 @@ int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
 
 int			hit_triangle(t_ray r, t_triangle *triangle, t_hit_record *rec)
 {
-	rec->normal = v_cross(v_minus(triangle->p1, triangle->p2), v_minus(triangle->p1, triangle->p3));
- 	set_face_normal(r, rec);
+	t_vec	p1p2;
+	t_vec	p1p3;
+	t_vec	normal;
+
+	//compute plane's normal
+	p1p2 = v_minus(triangle->p2, triangle->p1);
+	p1p3 = v_minus(triangle->p3, triangle->p1);
+	normal = v_cross(p1p2, p1p3);
+	// normal = v_normalize(normal);
+
+	//Step 1 : finding P
+	//check if ray and plane are parallel
+	double	parallel;
+
+	parallel = v_dot(normal, r.dir);
+	// if (v_dot(normal, r.dir) < 0)
+	// 	parallel = v_dot(normal, v_multiply(r.dir, -1));
+	if (fabs(parallel) < 1e-6)
+		return (FALSE);
+
+	//compute d parameter using equation 2
+	double	d;
+	double	t;
+
+	d = v_dot(normal, v_minus(triangle->p1, r.origin));
+	t = (v_dot(normal, r.origin) + d) / parallel;
 	
+	// printf("t : %f\n", t);
+	if (t < 0)
+		return (FALSE);
+	
+	//compute the intersection point using equation 1
+	rec->p = at(t, ray(r.origin, v_multiply(r.dir, t)));
+
+	//Step 2 : inside-outside test
 	t_vec	c;
 
-	double	d = v_dot(rec->normal, triangle->p1);
+	//edge 1;
+	t_vec	edge1;
+	t_vec	p_p1;
 
-	double	root = (v_dot(rec->normal, r.origin) + d) / v_dot(rec->normal, r.dir);
-	if (root < 0)
-		return (FALSE);
-	// printf("test1111111\n");
-	
-	t_point p = at(root, r);
-
-	t_vec edge1 = v_minus(triangle->p2, triangle->p1);
-	t_vec p_p1 = v_minus(p, triangle->p1);
+	edge1 = v_minus(triangle->p2, triangle->p1);
+	p_p1 = v_minus(rec->p, triangle->p1);
 	c = v_cross(edge1, p_p1);
-	if (v_dot(rec->normal, c) < 0)
+	if (v_dot(normal, c) > 0)
 		return (FALSE);
-	// printf("test2222222222\n");
-	t_vec edge2 = v_minus(triangle->p3, triangle->p2);
-	t_vec p_p2 = v_minus(p, triangle->p2);
-	c = v_cross(edge2, p_p2);
-	if (v_dot(rec->normal, c) < 0)
-		return (FALSE);
-	// printf("test3333333333\n");
-	t_vec edge3 = v_minus(triangle->p1, triangle->p3);
-	t_vec p_p3 = v_minus(p, triangle->p3);
-	c = v_cross(edge3, p_p3);
-	if (v_dot(rec->normal, c) < 0)
-		return (FALSE);
-	// printf("test44444444444\n");
 
-	if (root < rec->t_min || root > rec->t_max)
+	//edge 2;
+	t_vec	edge2;
+	t_vec	p_p2;
+
+	edge2 = v_minus(triangle->p3, triangle->p2);
+	p_p2 = v_minus(rec->p, triangle->p2);
+	c = v_cross(edge2, p_p2);
+	if (v_dot(normal, c) > 0)
 		return (FALSE);
-	rec->p = p;
-	rec->t = root;
+
+	//edge 3;
+	t_vec	edge3;
+	t_vec	p_p3;
+
+	edge3 = v_minus(triangle->p1, triangle->p3);
+	p_p3 = v_minus(rec->p, triangle->p3);
+	c = v_cross(edge3, p_p3);
+	if (v_dot(normal, c) > 0)
+		return (FALSE);
+
+	if (t < rec->t_min || t > rec->t_max)
+		return (FALSE);
+	rec->t = t;
+	rec->normal = normal;
+	set_face_normal(r, rec);
 	rec->color = triangle->color;
 	return (TRUE);
 }

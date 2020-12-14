@@ -6,22 +6,11 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/11 17:22:22 by root             ###   ########.fr       */
+/*   Updated: 2020/12/14 21:52:55 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hit.h"
-
-void		set_face_normal(t_ray r, t_hit_record *rec)
-{
-	if (v_dot(r.dir, rec->normal) < 0)
-		rec->front_face = TRUE;
-	else
-	{
-		rec->normal = v_multiply(rec->normal, -1);
-		rec->front_face = FALSE;
-	}
-}
 
 int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec)
 {
@@ -42,7 +31,6 @@ int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec)
 	else if (objects->type == PL)
 		hit_result = hit_plane(r, (t_plane *)objects->object, rec);
 	return (hit_result);
-
 }
 
 int			hit(t_ray r, t_objects *objects, t_hit_record *rec)
@@ -60,6 +48,36 @@ int			hit(t_ray r, t_objects *objects, t_hit_record *rec)
 			hit_anything = TRUE;
 			tmp_rec.t_max = tmp_rec.t;
 			*rec = tmp_rec;
+			// if (objects->type == TR)
+				// printf("TRIANGLE!!!\n");
+		}
+		objects = objects->next;
+	}
+	return (hit_anything);
+}
+
+static int		check_shadow(t_ray light_dir_ray, t_objects *objects)
+{
+	t_hit_record	rec;
+	int				hit_anything;
+
+	// tmp_rec.t_min = rec->t_min;
+	// tmp_rec.t_max = rec->t_max;
+	rec.t_min = 0.001;
+	rec.t_max = INFINITY;
+	hit_anything = FALSE;
+	while (objects)
+	{
+		if (hit_objects(light_dir_ray, objects, &rec))
+		{
+			// printf("%d\n", objects->type);
+			hit_anything = TRUE;
+			// if (objects->type == TR)
+				// printf("SHADOW OF TRIANGLE!!!\n");
+			// if (objects->type == SP)
+				// printf("SHADOW OF SPHERE!!!\n");
+			// if (objects->type == CY)
+				// printf("SHADOW OF CYLINDER!!!\n");
 		}
 		objects = objects->next;
 	}
@@ -72,11 +90,11 @@ static t_vec	reflect(t_vec v, t_vec n)
 	return (v_minus(v, v_multiply(n ,v_dot(v, n) * 2)));
 }
 
-static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec)
+static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec, t_objects *objects_for_check)
 {
-	t_color	ambient;
-	t_color	diffuse;
-	t_color	specular;
+	t_color		ambient;
+	t_color		diffuse;
+	t_color		specular;
 	t_vec		light_dir;
 	t_vec		view_dir;
 	t_vec		reflect_dir;
@@ -91,6 +109,8 @@ static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec)
 	view_dir = v_normalize(v_multiply(r.dir, -1));
 	light_dir = v_normalize(v_minus(light->point, rec->p));
 	reflect_dir = reflect(v_multiply(light_dir, -1), unit_norm);
+	if (check_shadow(ray(rec->p, v_minus(light->point, rec->p)), objects_for_check))
+		return (color(0, 0, 0));
 	ka = 0.1; // ambient strength;
 	kd = fmax(v_dot(unit_norm, light_dir), 0.0);// diffuse strength;
 	ks = 0.5; // specular strength;
@@ -147,13 +167,14 @@ static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec)
 static t_color	phong_color(t_ray r, t_objects *objects, t_hit_record *rec)
 {
 	t_color		light_color;
+	t_objects	*obj_for_check;
 
 	light_color = color(0, 0, 0);
-
+	obj_for_check = objects;
 	while (objects)
 	{
 		if (objects->type == LIGHT)
-			light_color = v_plus(light_color, phong_color_cal(r, objects->object, rec));
+			light_color = v_plus(light_color, phong_color_cal(r, objects->object, rec, obj_for_check));
 		objects = objects->next;
 	}
 	light_color = v_multiply_2(light_color, rec->color);
@@ -161,7 +182,7 @@ static t_color	phong_color(t_ray r, t_objects *objects, t_hit_record *rec)
 	light_color.y = fmin(light_color.y, 1);
 	light_color.z = fmin(light_color.z, 1);
 
-	return (light_color);	
+	return (light_color);
 }
 
 t_color		ray_color(t_ray r, t_objects *objects)

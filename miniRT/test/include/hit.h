@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 14:40:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/11 17:11:45 by root             ###   ########.fr       */
+/*   Updated: 2020/12/13 01:11:41 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "hit.h"
 #include "light.h"
 #include "objects.h"
+#include <unistd.h>
 
 # define TRUE 1
 # define FALSE 0
