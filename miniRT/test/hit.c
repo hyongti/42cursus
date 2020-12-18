@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/14 21:52:55 by root             ###   ########.fr       */
+/*   Updated: 2020/12/18 01:29:35 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec)
 		// printf("test test test test test test\n");
 		hit_result = hit_cylinder(r, (t_cylinder *)objects->object, rec);
 	}
+	else if (objects->type == SQ)
+	{
+		hit_result = hit_square(r, (t_square *)objects->object, rec);
+		// printf("test\n");
+	}
 	else if (objects->type == PL)
 		hit_result = hit_plane(r, (t_plane *)objects->object, rec);
 	return (hit_result);
@@ -38,8 +43,7 @@ int			hit(t_ray r, t_objects *objects, t_hit_record *rec)
 	t_hit_record	tmp_rec;
 	int				hit_anything;
 
-	tmp_rec.t_min = rec->t_min;
-	tmp_rec.t_max = rec->t_max;
+	tmp_rec = *rec;
 	hit_anything = FALSE;
 	while (objects)
 	{
@@ -64,7 +68,7 @@ static int		check_shadow(t_ray light_dir_ray, t_objects *objects)
 	// tmp_rec.t_min = rec->t_min;
 	// tmp_rec.t_max = rec->t_max;
 	rec.t_min = 0.001;
-	rec.t_max = INFINITY;
+	rec.t_max = v_len(light_dir_ray.dir);
 	hit_anything = FALSE;
 	while (objects)
 	{
@@ -106,62 +110,23 @@ static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec, t_obj
 	double		ksn;
 	double		spec;
 	unit_norm = v_normalize(rec->normal);
-	view_dir = v_normalize(v_multiply(r.dir, -1));
+	view_dir = v_multiply(r.dir, -1);
+	// printf("%f %f %f\n", r.dir.x, r.dir.y, r.dir.z);
 	light_dir = v_normalize(v_minus(light->point, rec->p));
+	// printf("%f %f %f\n", light_dir.x, light_dir.y, light_dir.z);
 	reflect_dir = reflect(v_multiply(light_dir, -1), unit_norm);
-	if (check_shadow(ray(rec->p, v_minus(light->point, rec->p)), objects_for_check))
+	if (check_shadow(ray(v_plus(rec->p, v_multiply(rec->normal, 0.0001)), light_dir), objects_for_check))
 		return (color(0, 0, 0));
 	ka = 0.1; // ambient strength;
 	kd = fmax(v_dot(unit_norm, light_dir), 0.0);// diffuse strength;
 	ks = 0.5; // specular strength;
-	ksn = 512;
+	ksn = 256;
 	ambient = v_multiply(light->color, ka);
 	diffuse = v_multiply(light->color, kd);
 	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), ksn);
 	specular = v_multiply(v_multiply(light->color, kd), spec);
 
 	return (v_plus(v_plus(ambient, diffuse), specular));
-	
-	// t_vec			to_light;
-	// t_vec			reflected;
-	// double			ambient_strength;
-	// double			phong;
-	// double			diff;
-	// double			spec;
-	// double			specular_strength;
-	
-	// // printf("%f %f %f\n", rec->sphere.center.x, rec.sphere.center.y, rec.sphere.center.z);
-
-	// // ambient;
-	// ambient_strength = 0.1;
-	// t_color ambient = v_multiply(light->color, ambient_strength);
-
-	// // diffuse
-	
-	// if (rec->type == SP)
-	// 	to_light = v_normalize(v_minus(light->point, rec->sphere.center));
-	// if (rec->type == TR)
-	// 	to_light = v_normalize(v_minus(light->point, rec->p));
-	// diff = v_dot(to_light, rec->normal);
-	// diff = MAX(diff, 0);
-	// t_color diffuse = v_multiply(rec->color, diff);
-	
-	// // specular
-	// reflected = v_minus(to_light, v_multiply(rec->normal, 2 * v_dot(to_light, rec->normal)));
-	// spec = pow(MAX(v_dot(r.dir, reflected), 0), 256);
-	// specular_strength = 0.5;
-	// t_color specular = v_multiply(light->color, MAX(specular_strength * spec, 0));
-	// // printf("specular : %.15f\n", spec);
-	// // printf("%f\n", diffuse);
-
-	// t_color result = v_plus(v_plus(ambient, diffuse), specular);
-
-	// result = v_multiply_2(result, rec->color);
-
-
-	// // printf("%f %f %f\n", result.x, result.y, result.z);
-	// // phong = ((ambient + phong) > 1) ? 1 : ambient + phong + specular;
-	// return (result);
 }
 
 static t_color	phong_color(t_ray r, t_objects *objects, t_hit_record *rec)
@@ -193,7 +158,8 @@ t_color		ray_color(t_ray r, t_objects *objects)
 	t_vec			normal;
 
 	rec.t_max = INFINITY;
-	rec.t_min = 0;
+	rec.t_min = 0.0001;
+	// printf("%f %f %f\n", r.dir.x, r.dir.y, r.dir.z);
 	if (hit(r, objects, &rec))
 	{
 		if (objects->type == LIGHT)

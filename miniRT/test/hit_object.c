@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:45:23 by root              #+#    #+#             */
-/*   Updated: 2020/12/14 21:45:46 by root             ###   ########.fr       */
+/*   Updated: 2020/12/18 01:34:04 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,82 +63,98 @@ int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec)
 	}
 }
 
+int		hit_plane(t_ray r, t_plane *plane, t_hit_record *rec)
+{
+	double	denom;
+	double	t;
+	t_vec	to_hit;
+
+	denom = v_dot(plane->normal, r.dir);
+	if (fabs(denom) < 1e-6)
+	 	return (FALSE);
+	to_hit = v_minus(plane->point, r.origin);
+	t = v_dot(to_hit, plane->normal) / denom;
+	if (t < rec->t_min || t > rec->t_max)
+		return (FALSE);
+	rec->t = t;
+	rec->p = at(rec->t, r);
+	rec->normal = plane->normal;
+	set_face_normal(r, rec);
+	rec->color = plane->color;
+	return (TRUE);
+}
+
 int			hit_triangle(t_ray r, t_triangle *triangle, t_hit_record *rec)
 {
-	t_vec	p1p2;
-	t_vec	p1p3;
-	t_vec	normal;
+	t_vec   p1p2;	
+	t_vec   p1p3;
+	t_vec   normal;
 
 	//compute plane's normal
 	p1p2 = v_minus(triangle->p2, triangle->p1);
 	p1p3 = v_minus(triangle->p3, triangle->p1);
-	normal = v_cross(p1p2, p1p3);
+	normal = v_normalize(v_cross(p1p2, p1p3));
 	// normal = v_normalize(normal);
 
-	//Step 1 : finding P
-	//check if ray and plane are parallel
-	double	parallel;
-
-	parallel = v_dot(normal, r.dir);
-	// if (v_dot(normal, r.dir) < 0)
-	// 	parallel = v_dot(normal, v_multiply(r.dir, -1));
-	if (fabs(parallel) < 1e-6)
-		return (FALSE);
-
-	//compute d parameter using equation 2
-	double	d;
+   //Step 1 : finding P
+	double	denom;
 	double	t;
+	t_vec	to_hit;
 
-	d = v_dot(normal, v_minus(triangle->p1, r.origin));
-	t = (v_dot(normal, r.origin) + d) / parallel;
-	
-	// printf("t : %f\n", t);
-	if (t < 0)
-		return (FALSE);
-	
-	//compute the intersection point using equation 1
-	rec->p = at(t, ray(r.origin, v_multiply(r.dir, t)));
-
-	//Step 2 : inside-outside test
-	t_vec	c;
-
-	//edge 1;
-	t_vec	edge1;
-	t_vec	p_p1;
-
-	edge1 = v_minus(triangle->p2, triangle->p1);
-	p_p1 = v_minus(rec->p, triangle->p1);
-	c = v_cross(edge1, p_p1);
-	if (v_dot(normal, c) > 0)
-		return (FALSE);
-
-	//edge 2;
-	t_vec	edge2;
-	t_vec	p_p2;
-
-	edge2 = v_minus(triangle->p3, triangle->p2);
-	p_p2 = v_minus(rec->p, triangle->p2);
-	c = v_cross(edge2, p_p2);
-	if (v_dot(normal, c) > 0)
-		return (FALSE);
-
-	//edge 3;
-	t_vec	edge3;
-	t_vec	p_p3;
-
-	edge3 = v_minus(triangle->p1, triangle->p3);
-	p_p3 = v_minus(rec->p, triangle->p3);
-	c = v_cross(edge3, p_p3);
-	if (v_dot(normal, c) > 0)
-		return (FALSE);
-
+	denom = v_dot(normal, r.dir);
+	if (fabs(denom) < 1e-6)
+	 	return (FALSE);
+	to_hit = v_minus(triangle->p1, r.origin);
+	t = v_dot(to_hit, normal) / denom;
 	if (t < rec->t_min || t > rec->t_max)
 		return (FALSE);
-	rec->t = t;
-	rec->normal = normal;
-	set_face_normal(r, rec);
-	rec->color = triangle->color;
-	return (TRUE);
+
+   t_point   p;
+
+   p = at(t, ray(r.origin, v_multiply(r.dir, t)));
+
+   //Step 2 : inside-outside test
+   t_vec   c;
+
+   //edge 1;
+   t_vec   edge1;
+   t_vec   p_p1;
+
+   edge1 = v_minus(triangle->p2, triangle->p1);
+   p_p1 = v_minus(p, triangle->p1);
+   c = v_cross(edge1, p_p1);
+   if (v_dot(normal, c) < 0)
+	  return (FALSE);
+
+   //edge 2;
+   t_vec   edge2;
+   t_vec   p_p2;
+
+   edge2 = v_minus(triangle->p3, triangle->p2);
+   p_p2 = v_minus(p, triangle->p2);
+   c = v_cross(edge2, p_p2);
+   if (v_dot(normal, c) < 0)
+	  return (FALSE);
+
+   //edge 3;
+   t_vec   edge3;
+   t_vec   p_p3;
+
+   edge3 = v_minus(triangle->p1, triangle->p3);
+   p_p3 = v_minus(p, triangle->p3);
+   c = v_cross(edge3, p_p3);
+   if (v_dot(normal, c) < 0)
+	  return (FALSE);
+
+   if (t < rec->t_min || t > rec->t_max)
+	  return (FALSE);
+   rec->t = t;
+   rec->normal = normal;
+   set_face_normal(r, rec);
+   rec->color = triangle->color;
+   rec->p = p;
+   return (TRUE);
+
 }
 
 int			hit_cylinder(t_ray r, t_cylinder *cylinder, t_hit_record *rec)
@@ -174,71 +190,139 @@ int			hit_cylinder(t_ray r, t_cylinder *cylinder, t_hit_record *rec)
 		}
 		rec->t = root;
 		rec->p = at(rec->t, r);
+		rec->color = cylinder->color;
+		set_face_normal(r, rec);
 		center_len = sqrt(v_len_squared(v_minus(rec->p, cylinder->p)) - cylinder->radius * cylinder->radius);
-		if (center_len < (cylinder->len / 2))
+		if (center_len < cylinder->len)
 		{
 			if (v_dot(cylinder->center_vec, v_minus(rec->p, cylinder->p)) >= 0)
-				rec->normal = v_multiply(v_minus(rec->p, at(center_len, ray(cylinder->p, cylinder->center_vec))), 1 / cylinder->radius);
+				rec->normal = v_normalize(v_multiply(v_minus(rec->p, at(center_len, ray(cylinder->p, cylinder->center_vec))), 1 / cylinder->radius));
 			else
-				rec->normal = v_multiply(v_minus(rec->p, at(-1 * center_len, ray(cylinder->p, cylinder->center_vec))), 1 / cylinder->radius);
+			 	return (FALSE);
 		}
-		else if (center_len >= (cylinder->len / 2))
+		else if (center_len >= cylinder->len)
 		{
 			root = (-b + sqrtd) / a;
 			rec->t = root;
 			rec->p = at(rec->t, r);
 			center_len = sqrt(v_len_squared(v_minus(rec->p, cylinder->p)) - cylinder->radius * cylinder->radius);
-			if (center_len < (cylinder->len / 2))
+			if (center_len < cylinder->len)
 			{
 				if (v_dot(cylinder->center_vec, v_minus(rec->p, cylinder->p)) >= 0)
-					rec->normal = v_multiply(v_minus(rec->p, at(center_len, ray(cylinder->p, cylinder->center_vec))), 1 / cylinder->radius);
+				{
+					rec->normal = v_normalize(v_multiply(v_minus(rec->p, at(center_len, ray(cylinder->p, cylinder->center_vec))), 1 / cylinder->radius));
+					rec->color = cylinder->color;
+					set_face_normal(r, rec);
+				}
 				else
-					rec->normal = v_multiply(v_minus(rec->p, at(-1 * center_len, ray(cylinder->p, cylinder->center_vec))), 1 / cylinder->radius);
+				 	return (FALSE);
 			}
 			else
 				return (FALSE);
 		}
-		rec->color = cylinder->color;
-		set_face_normal(r, rec);
+		// rec->color = cylinder->color;
+		// set_face_normal(r, rec);
 		return (TRUE);
 	}
 }
 
-int		hit_plane(t_ray r, t_plane *plane, t_hit_record *rec)
+int			hit_square(t_ray r, t_square *square, t_hit_record *rec)
 {
+	t_vec	half_horizontal;
+	t_vec	half_vertical;
+	t_point	a;
+	t_point	b;
+	t_point	c;
+	t_point	d;
+	
+	half_horizontal = v_multiply(v_normalize(v_cross(v_minus(square->p, point(square->p.x, 0 ,square->p.z)), square->normal)), square->side_len / 2.0);
+	half_vertical = v_multiply(v_normalize(v_cross(half_horizontal, square->normal)), square->side_len / 2.0);
+	a = v_plus(v_plus(square->p, half_horizontal), half_vertical);
+	b = v_plus(v_minus(square->p, half_horizontal), half_vertical);
+	c = v_minus(v_minus(square->p, half_horizontal), half_vertical);
+	d = v_minus(v_plus(square->p, half_horizontal), half_vertical);
+	
+	//Step 1 : finding P
 	double	denom;
 	double	t;
 	t_vec	to_hit;
 
-	if (v_dot(plane->normal, v_normalize(r.dir)) < 0)
-		plane->normal = v_multiply(plane->normal, -1);
-	denom = v_dot(plane->normal, v_normalize(r.dir));
-	// printf("denom : %f\n", denom);
-	// printf("1e-6 : %f\n", 1e-6);
-	if (denom > 1e-6)
+	denom = v_dot(square->normal, r.dir);
+	if (fabs(denom) < 1e-6)
 	{
-		to_hit = v_minus(plane->point, r.origin);
-		t = v_dot(to_hit, plane->normal);
-		// printf("t : %f\n", t);
-		if (t < rec->t_min || t > rec->t_max)
-		{
-			// printf("1111111111111111\n");
-			return (FALSE);
-		}
-	}
-	else
-	{
-		// printf("22222222222222222222222222222\n");
+		// printf("test denom test denom test denom\n");
 		return (FALSE);
 	}
-	// printf("3333333333333333333333\n");
+
+	to_hit = v_minus(square->p, r.origin);
+	t = v_dot(to_hit, square->normal) / denom;
+	if (t < rec->t_min || t > rec->t_max)
+		return (FALSE);
+
+	t_point   p;
+
+	p = at(t, ray(r.origin, v_multiply(r.dir, t)));
+
+	t_vec	e;
+	//edge 1;
+   t_vec   edge1;
+   t_vec   pa;
+
+	edge1 = v_minus(b, a);
+	pa = v_minus(p, a);
+	e = v_cross(edge1, pa);
+	if (v_dot(square->normal, e) < 0)
+	{
+		// printf("test1 test1 test1\n");
+		return (FALSE);
+	}
+
+
+   //edge 2;
+	t_vec	edge2;
+	t_vec	pb;
+
+	edge2 = v_minus(c, b);
+	pb = v_minus(p, b);
+	e = v_cross(edge2, pb);
+	if (v_dot(square->normal, e) < 0)
+	{
+		// printf("test2 test2 test2\n");
+		return (FALSE);
+	}
+
+
+   //edge 3;
+   	t_vec	edge3;
+	t_vec	pc;
+
+	edge2 = v_minus(d, c);
+	pc = v_minus(p, c);
+	e = v_cross(edge3, pc);
+	if (v_dot(square->normal, e) < 0)
+	{
+		// printf("test3 test3 test3\n");
+		return (FALSE);
+	}
+
+	 //edge 4;
+   	t_vec	edge4;
+	t_vec	pd;
+
+	edge2 = v_minus(a, d);
+	pd = v_minus(p, d);
+	e = v_cross(edge4, pd);
+	if (v_dot(square->normal, e) < 0)
+	{
+		// printf("test4 test4 test4\n");
+		return (FALSE);
+	}
+
+
 	rec->t = t;
-	rec->p = at(rec->t, r);
-	rec->normal = plane->normal;
-	// rec->normal = plane->normal;
-	// rec->sphere.center = sphere->center;
-	rec->color = plane->color;
-	//printf("%f\n", v_dot(r.dir, rec->normal));
+	rec->normal = square->normal;
 	set_face_normal(r, rec);
+	rec->color = square->color;
+	rec->p = p;
 	return (TRUE);
 }

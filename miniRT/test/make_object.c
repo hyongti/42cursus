@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_object.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:34:00 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/14 19:29:49 by root             ###   ########.fr       */
+/*   Updated: 2020/12/18 01:24:38 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,18 @@ t_cylinder	*cylinder(t_point p, t_vec cen_vec, t_color color, double radius, dou
 	return (cylinder);
 }
 
+t_square	*square(t_point p, t_vec normal, t_color color, double side_len)
+{
+	t_square		*square;
+	
+	if (!(square = (t_square *)malloc(sizeof(t_square))))
+		return (0);
+	square->p = p;
+	square->normal = v_normalize(normal);
+	square->color = color;
+	square->side_len = side_len;
+	return (square);
+}
 // t_plane		*plane(t_point p, t_vec normal, t_color color)
 // {
 // 	t_plane		*plane;

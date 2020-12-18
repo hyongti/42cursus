@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 14:40:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/13 01:11:41 by root             ###   ########.fr       */
+/*   Updated: 2020/12/18 01:01:36 by hyongti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int			hit_sphere(t_ray r, t_sphere *sphere, t_hit_record *rec);
 int			hit_triangle(t_ray r, t_triangle *triangle, t_hit_record *rec);
 int			hit_cylinder(t_ray r, t_cylinder *cylinder, t_hit_record *rec);
 int			hit_plane(t_ray r, t_plane *plane, t_hit_record *rec);
+int			hit_square(t_ray r, t_square *square, t_hit_record *rec);
 int			hit_objects(t_ray r, t_objects *objects, t_hit_record *rec);
 int			hit(t_ray r, t_objects *objects, t_hit_record *rec);
 t_color		ray_color(t_ray r, t_objects *objects);
