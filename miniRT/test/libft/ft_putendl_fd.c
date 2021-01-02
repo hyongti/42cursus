@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 19:15:00 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/10/10 15:21:49 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/10/12 20:07:56 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "libft.h"
 
-# define PI 3.1415926535897932385
-
-double	deg_to_rad(double degrees);
-
-#endif
+void	ft_putendl_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
+}

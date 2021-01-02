@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 19:15:00 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/10/12 18:45:41 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/10/12 20:46:23 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "libft.h"
 
-# define PI 3.1415926535897932385
-
-double	deg_to_rad(double degrees);
-
-#endif
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (lst)
+	{
+		if (del)
+			del(lst->content);
+		free(lst);
+	}
+}

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 19:15:00 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/10/12 18:03:33 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/10/12 18:05:05 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "libft.h"
 
-# define PI 3.1415926535897932385
-
-double	deg_to_rad(double degrees);
-
-#endif
+t_list		*ft_lstlast(t_list *lst)
+{
+	while (lst && lst->next)
+		lst = lst->next;
+	return (lst);
+}

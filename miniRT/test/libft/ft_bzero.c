@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 19:15:00 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/09/28 16:06:43 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/09/28 16:25:50 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "libft.h"
 
-# define PI 3.1415926535897932385
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*string;
 
-double	deg_to_rad(double degrees);
-
-#endif
+	string = (unsigned char *)s;
+	while (n--)
+		*(string++) = 0;
+}

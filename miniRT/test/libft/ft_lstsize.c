@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 19:15:00 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/10/12 17:59:42 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/10/12 18:01:52 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "libft.h"
 
-# define PI 3.1415926535897932385
+int		ft_lstsize(t_list *lst)
+{
+	int	size;
 
-double	deg_to_rad(double degrees);
-
-#endif
+	size = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		size++;
+	}
+	return (size);
+}

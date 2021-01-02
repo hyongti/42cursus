@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 20:08:37 by hyongti           #+#    #+#             */
-/*   Updated: 2020/12/09 20:11:29 by hyongti          ###   ########.fr       */
+/*   Updated: 2021/01/02 01:24:40 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 
 typedef struct	s_light
 {
-	t_point		point;
+	t_point		p;
 	t_color		color;
+	double		brightness_ratio;
 }				t_light;
 
-t_light		*light(t_point poin, t_color color);
+t_light		*light(t_point point, double ratio, t_color color);
 
 #endif

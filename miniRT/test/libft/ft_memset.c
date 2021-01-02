@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.c                                     :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:54:26 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/08 11:04:19 by root             ###   ########.fr       */
+/*   Created: 2020/09/28 12:53:24 by root              #+#    #+#             */
+/*   Updated: 2020/10/05 19:50:39 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "common_utils.h"
+#include "libft.h"
 
-double		degrees_to_radians(double degrees)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	return (degrees * PI / 180.0);
+	unsigned char	*string;
+
+	string = (unsigned char *)b;
+	while (len--)
+		*(string++) = (unsigned char)c;
+	return (b);
 }

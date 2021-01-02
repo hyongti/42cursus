@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyongti <hyongti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:35:31 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/18 00:45:11 by hyongti          ###   ########.fr       */
+/*   Updated: 2021/01/02 01:12:48 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define OBJECTS_H
 
 #include "make_object.h"
+#include "common_utils.h"
 
 # define LIGHT 0
 # define SP 1
@@ -21,6 +22,8 @@
 # define TR 3
 # define CY 4
 # define SQ 5
+# define CO 6
+# define CAM 20
 
 typedef struct	s_objects
 {
@@ -29,8 +32,8 @@ typedef struct	s_objects
 	void		*next;
 }				t_objects;
 
-t_objects		*objects_new(int obj_type, void *object);
-t_objects		*objects_last(t_objects *lst);
-void			objects_add_back(t_objects **lst, t_objects *new);
+t_objects		*obj_new(int obj_type, void *object);
+t_objects		*obj_last(t_objects *lst);
+void			obj_add_back(t_objects **lst, t_objects *new);
 
 #endif

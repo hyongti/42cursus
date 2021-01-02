@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 19:15:00 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/10/08 15:36:13 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/10/09 15:23:14 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "libft.h"
 
-# define PI 3.1415926535897932385
+void		*ft_memmove(void *dest, const void *src, size_t num)
+{
+	size_t	idx;
 
-double	deg_to_rad(double degrees);
-
-#endif
+	idx = 0;
+	if (dest == 0 && src == 0)
+		return (0);
+	if (dest <= src)
+	{
+		while (idx < num)
+		{
+			((unsigned char *)dest)[idx] = ((unsigned char *)src)[idx];
+			idx++;
+		}
+	}
+	else
+	{
+		while (num)
+		{
+			((unsigned char *)dest)[num - 1] = ((unsigned char *)src)[num - 1];
+			num--;
+		}
+	}
+	return (dest);
+}

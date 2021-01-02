@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 19:15:00 by hyeonkim         ###   ########.fr       */
+/*   Created: 2020/10/12 18:05:46 by hyeonkim          #+#    #+#             */
+/*   Updated: 2020/10/12 20:46:16 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "libft.h"
 
-# define PI 3.1415926535897932385
+void		ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*tmp;
 
-double	deg_to_rad(double degrees);
-
-#endif
+	if (!lst || !new)
+		return ;
+	tmp = ft_lstlast(*lst);
+	if (!tmp)
+	{
+		*lst = new;
+		return ;
+	}
+	tmp->next = new;
+}
