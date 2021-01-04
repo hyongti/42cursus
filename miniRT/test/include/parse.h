@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 15:36:28 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 21:37:04 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/04 15:56:57 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 t_scene	*read_rt(char *argv);
 void	parse_rt(char *line, t_scene *scene);
 void	get_resolution(char *line, t_scene *scene);
-void	get_ambient(char *line, t_scene *scene);
+// void	get_ambient(char *line, t_scene *scene);
 void	get_camera(char *line, t_scene *scene);
 void	get_light(char *line, t_scene *scene);
 void	get_sphere(char *line, t_scene *scene);

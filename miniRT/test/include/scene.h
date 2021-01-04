@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 19:16:18 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 01:29:55 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/04 15:53:20 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 #include "objects.h"
 #include "light.h"
+
+typedef struct	s_data {
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_data;
 
 typedef struct	s_canvas
 {
@@ -49,5 +57,6 @@ typedef struct	s_scene
 void		scene_init(t_scene *scene);
 t_camera	*cam_init(t_point lookfrom, t_vec lookdir, double hfov);
 t_camera	*set_cam(t_camera *camera, t_scene *scene);
+void		render(t_scene *scene, t_data img);
 
 # endif

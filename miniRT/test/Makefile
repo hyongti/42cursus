@@ -6,7 +6,7 @@
 #    By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 18:59:15 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/01/02 19:20:44 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/01/04 15:55:16 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCDIR	=	./src
 all : $(NAME)
 
 $(NAME) : 
-	gcc -fsanitize=address *.c ./*/*.c ./*/*/*.c -I ./include -D BUFFER_SIZE=1 -o $(NAME)
+	gcc -Wall -Wextra -Werror -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit *.c ./libft/*.c ./src/*.c ./src/*/*.c -I ./include -I ./mlx -D BUFFER_SIZE=1 -o $(NAME)
 
 run : $(NAME)
 	./$(NAME) scene.rt > image.ppm
@@ -29,4 +29,4 @@ run : $(NAME)
 
 re :
 	rm minirt
-	gcc -fsanitize=address *.c ./*/*.c ./*/*/*.c -I ./include -D BUFFER_SIZE=1 -o $(NAME)
+	gcc -Wall -Wextra -Werror -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit *.c ./libft/*.c ./src/*.c ./src/*/*.c -I ./include -I ./mlx -D BUFFER_SIZE=1 -o $(NAME)

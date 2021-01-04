@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 13:37:58 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/04 15:56:18 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,9 @@ static t_color	phong_color(t_ray r, t_objects *objects, t_hit_record *rec)
 t_color		ray_color(t_ray r, t_objects *objects)
 {
 	t_hit_record	rec;
-	double			t;
-	t_vec			unit_direction;
-	t_vec			normal;
+	// double			t;
+	// t_vec			unit_direction;
+	// t_vec			normal;
 
 	rec.t_max = INFINITY;
 	rec.t_min = 0.0001;
