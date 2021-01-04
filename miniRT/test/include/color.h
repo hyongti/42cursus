@@ -17,5 +17,6 @@
 
 void	write_color(t_vec vec);
 t_color color(double x, double y, double z);
+int		color_to_int(t_color pixel_color);
 
 #endif

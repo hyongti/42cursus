@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 15:35:13 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 18:53:01 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/04 15:56:42 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	get_resolution(char *line, t_scene *scene)
 	// printf("stored R : %d %d %f\n", scene->canvas.width, scene->canvas.height, scene->canvas.ratio);
 }
 
-void	get_ambient(char *line, t_scene *scene)
-{
-	// printf("A : %s\n", line);
-}
+// void	get_ambient(char *line, t_scene *scene)
+// {
+// 	// printf("A : %s\n", line);
+// }
 
 void	get_camera(char *line, t_scene *scene)
 {
