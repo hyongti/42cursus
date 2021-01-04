@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 15:35:13 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 16:22:24 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/02 18:53:01 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	get_square(char *line, t_scene *scene)
 	ori = ft_split(data[1], ',');
 	alb = ft_split(data[3], ',');
 	position = point(ft_atod(pos[0]), ft_atod(pos[1]), ft_atod(pos[2]));
+	position = v_plus(position, vec(1e-6, 1e-6, 1e-6));
 	len = ft_atod(data[2]);
 	orientation = vec(ft_atod(ori[0]), ft_atod(ori[1]), ft_atod(ori[2]));
 	albedo = color(ft_atod(alb[0]), ft_atod(alb[1]), ft_atod(alb[2]));

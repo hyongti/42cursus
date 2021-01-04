@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:09:12 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 16:18:47 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/02 18:47:02 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		main(int argc, char *argv[])
 				// printf("%f %f %f\n", r.dir.x, r.dir.y, r.dir.z);
 				pixel_color = ray_color(r, scene->objs);
 				// printf("%f %f %f\n", pixel_color.x, pixel_color.y, pixel_color.z);
-				// write_color(pixel_color);
+				write_color(pixel_color);
 				++i;
 			}
 			--j;

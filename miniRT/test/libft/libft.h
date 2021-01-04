@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:51:44 by root              #+#    #+#             */
-/*   Updated: 2021/01/01 21:12:49 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/02 19:11:41 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
+
+# define BUFEER_SIZE 1
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -33,6 +35,7 @@ size_t				ft_strlen(const char *s);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strdup(const char *s);
+char				*ft_strndup(const char *s, size_t n);
 char				*ft_strnstr(const char *big, const char *little,
 															size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);

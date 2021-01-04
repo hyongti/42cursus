@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:18:07 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 16:05:27 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/02 19:12:43 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ double				ft_atod(const char *s)
 	int			decimal_part;
 	int			decimal_len;
 
-	sign = (s[0] == '-') ? -1 : 1;
+	while (ft_isspace(*s) == 1)
+		++s;
+	sign = (*s == '-') ? -1 : 1;
 	data = ft_split(s, '.');
 	integer_part = ft_atoi(data[0]);
 	if (data[1] == NULL)
