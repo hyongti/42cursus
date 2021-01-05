@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 13:37:58 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/05 16:53:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int			hit(t_ray r, t_objects *objects, t_hit_record *rec)
 			hit_anything = TRUE;
 			tmp_rec.t_max = tmp_rec.t;
 			*rec = tmp_rec;
+			rec->obj = objects;
 		}
 		objects = objects->next;
 	}
@@ -72,7 +73,7 @@ static int		check_shadow(t_ray ray, t_objects *objects)
 	return (hit_anything);
 }
 
-static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec, t_objects *objects_for_check)
+static t_color	phong_color_get(t_ray r, t_light *light, t_hit_record *rec, t_objects *objects_for_check)
 {
 	t_color		ambient;
 	t_color		diffuse;
@@ -81,16 +82,15 @@ static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec, t_obj
 	t_vec		view_dir;
 	t_vec		reflect_dir;
 	t_vec		unit_norm;
-
 	double		ka;
 	double		kd;
 	double		ks;
 	double		ksn;
 	double		spec;
 	double		distance_attenuation;
+
 	unit_norm = v_normalize(rec->normal);
 	view_dir = v_multiply(r.dir, -1);
-	// printf("%f %f %f\n", r.dir.x, r.dir.y, r.dir.z);
 	light_dir = v_minus(light->p, rec->p);
 	if (check_shadow(ray(v_plus(rec->p, v_multiply(rec->normal, 1e-4)), light_dir), objects_for_check))
 		return (color(0, 0, 0));
@@ -101,9 +101,14 @@ static t_color	phong_color_cal(t_ray r, t_light *light, t_hit_record *rec, t_obj
 	ks = 0.5; // specular strength;
 	ksn = 256;
 	ambient = v_multiply(light->color, ka);
+
 	diffuse = v_multiply(light->color, kd);
+	// diffuse = color(0, 0, 0);
+
 	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), ksn);
+
 	specular = v_multiply(v_multiply(light->color, kd), spec);
+	// specular = color(0, 0, 0);
 	distance_attenuation = 1.0 / v_len_squared(v_minus(light->p, rec->p));
 
 	return (v_multiply(v_plus(v_plus(ambient, diffuse), specular), distance_attenuation));
@@ -119,10 +124,7 @@ static t_color	phong_color(t_ray r, t_objects *objects, t_hit_record *rec)
 	while (objects)
 	{
 		if (objects->type == LIGHT)
-		{
-			// printf("%f\n", distance_attenuation);
-			light_color = v_plus(light_color, phong_color_cal(r, objects->object, rec, obj_for_check));
-		}
+			light_color = v_plus(light_color, phong_color_get(r, objects->object, rec, obj_for_check));
 		objects = objects->next;
 	}
 	light_color = v_multiply_2(light_color, rec->color);
@@ -136,9 +138,9 @@ static t_color	phong_color(t_ray r, t_objects *objects, t_hit_record *rec)
 t_color		ray_color(t_ray r, t_objects *objects)
 {
 	t_hit_record	rec;
-	double			t;
-	t_vec			unit_direction;
-	t_vec			normal;
+	// double			t;
+	// t_vec			unit_direction;
+	// t_vec			normal;
 
 	rec.t_max = INFINITY;
 	rec.t_min = 0.0001;
@@ -153,5 +155,16 @@ t_color		ray_color(t_ray r, t_objects *objects)
 	// unit_direction = v_normalize(r.dir);
 	// t = 0.5 * (unit_direction.y + 1.0);
 	// return (v_plus(v_multiply(color(1, 1, 1), 1.0 - t), v_multiply(color(0.5, 0.7, 1.0), t)));
+	return (color(0, 0, 0));
+}
+
+t_color		ray_color_preview(t_ray r, t_objects *objects)
+{
+	t_hit_record	rec;
+
+	rec.t_max = INFINITY;
+	rec.t_min = 0.0001;
+	if (hit(r, objects, &rec))
+			return (rec.color);
 	return (color(0, 0, 0));
 }

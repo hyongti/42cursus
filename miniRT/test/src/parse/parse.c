@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 15:35:13 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 18:53:01 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/05 11:31:38 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ void	get_resolution(char *line, t_scene *scene)
 void	get_ambient(char *line, t_scene *scene)
 {
 	// printf("A : %s\n", line);
+	char		**data;
+	double		strength;
+	char		**alb;
+	t_color		albedo;
+
+	data = ft_split(line, ' ');
+	strength = ft_atod(data[0]);
+	alb = ft_split(data[1], ',');
+	albedo = color(ft_atod(alb[0]), ft_atod(alb[1]),ft_atod(alb[2]));
+	albedo = v_multiply(albedo, strength * 1.0 / 255.0);
+	scene->global.ambient = albedo;
 }
 
 void	get_camera(char *line, t_scene *scene)

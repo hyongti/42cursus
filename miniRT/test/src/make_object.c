@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:34:00 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 00:46:44 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/04 15:56:34 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_plane		*plane(t_point point, t_vec normal, t_color color)
 t_triangle	*triangle(t_point a, t_point b, t_point c, t_color color)
 {
 	t_triangle	*triangle;
-	t_vec		ab;
+	// t_vec		ab;
 
 	if (!(triangle = (t_triangle *)malloc(sizeof(t_triangle))))
 		return (0);

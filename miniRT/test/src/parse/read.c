@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 15:35:09 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/03 14:57:59 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/04 15:57:16 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	parse_rt(char *line, t_scene *scene)
 	if (ft_strnstr(line, "R", 1) != NULL)
 		get_resolution(line + 1, scene);
 		// printf("info of R : %s\n", line + 1);
-	else if (ft_strnstr(line, "A", 1) != NULL)
-		get_ambient(line + 1, scene);
+	// else if (ft_strnstr(line, "A", 1) != NULL)
+	// 	get_ambient(line + 1, scene);
 		// printf("info of A : %s\n", line + 1);
 	else if (ft_strnstr(line, "c ", 2) != NULL)
 		get_camera(line + 2, scene);
