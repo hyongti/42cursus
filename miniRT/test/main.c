@@ -6,7 +6,11 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:09:12 by hyeonkim          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2021/01/05 20:25:35 by hyeonkim         ###   ########.fr       */
+=======
 /*   Updated: 2021/01/04 17:21:55 by hyeonkim         ###   ########.fr       */
+>>>>>>> d8fdf65fa026864a2fdd8ca0d3e34f71c1585ead
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +22,30 @@
 #include "scene.h"
 #include "make_object.h"
 #include "parse.h"
-#include "mlx.h"
+#include "control.h"
+// #include "mlx.h"
 
 int		main(int argc, char *argv[])
 {
-	t_scene		*scene;
+	// t_scene		*scene;
+	t_cntl		cntl;
+	t_data		img;
 
 	if (argc == 2)
 	{
-		scene = read_rt(argv[1]);
-		
-		void		*mlx;
-		void		*mlx_win;
-		t_data		img;
-
-		mlx = mlx_init();
-		mlx_win = mlx_new_window(mlx, scene->canvas.width, scene->canvas.height, "miniRT!");
-		img.img = mlx_new_image(mlx, scene->canvas.width, scene->canvas.height);
-		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-		render(scene, img);
-		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		mlx_loop(mlx);
-		free(scene);
+		cntl.scene = read_rt(argv[1]);
+		cntl.mlx = mlx_init();
+		cntl.scene->cam_onair = cntl.scene->cam_list->object;
+		cntl_init(&cntl);
+		cntl.win = mlx_new_window(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height, "miniRT!");
+		img.img = mlx_new_image(cntl.mlx, cntl.scene->canvas.width, cntl.scene->canvas.height);
+		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+		cntl.img = &img;
+		// scene->img = &img;
+		render_preview(cntl.scene, cntl.img, cntl.light_on);
+		mlx_put_image_to_window(cntl.mlx, cntl.win, img.img, 0, 0);
+		my_mlx_control(&cntl);
+		free(cntl.scene);
 	}
 }
 

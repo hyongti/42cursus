@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 19:46:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/02 01:18:09 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/05 12:37:24 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void		scene_init(t_scene *scene)
 {
+	scene->global.ambient = color(0, 0, 0);
 	scene->objs = NULL;
 	scene->cam_list = NULL;
-	scene->on_air = NULL;
+	scene->cam_onair = NULL;
 }
 
 t_camera	*cam_init(t_point lookfrom, t_vec lookdir, double hfov)
