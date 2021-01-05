@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 19:16:18 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/05 20:58:56 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/05 21:03:26 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,8 @@
 #include "color.h"
 #include "mlx.h"
 
-typedef struct	s_data {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_data;
-
-typedef struct	s_data {
+typedef struct	s_data
+{
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
