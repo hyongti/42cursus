@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.c                                          :+:      :+:    :+:   */
+/*   object_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:36:07 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/01 21:22:59 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/08 19:35:43 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "objects.h"
+#include "utils.h"
 
-t_objects		*obj_new(int obj_type, void *object)
+t_objects		*obj_new(int obj_type, void *object, t_texture *texture)
 {
 	t_objects	*new;
 
@@ -21,6 +21,9 @@ t_objects		*obj_new(int obj_type, void *object)
 	new->next = 0;
 	new->type = obj_type;
 	new->object = object;
+	new->texture = texture;
+	new->rotate = NULL;
+	new->rotate_normal = NULL;
 	return (new);
 }
 

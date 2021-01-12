@@ -6,7 +6,7 @@
 #    By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 18:59:15 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/01/05 21:00:02 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/01/11 10:27:36 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ MLX_DIR	=	./mlx
 all : $(NAME)
 
 $(NAME) : 
-	gcc -Wall -Wextra -Werror -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit *.c ./libft/*.c ./src/*.c ./src/*/*.c -I ./include -I ./mlx -D BUFFER_SIZE=1 -o $(NAME)
+	# gcc -Wall -Wextra -Werror -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit *.c ./libft/*.c ./src/*.c ./src/*/*.c -I ./include -I ./mlx -D BUFFER_SIZE=1 -o $(NAME)
+	gcc -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit *.c ./libft/*.c ./src/*.c ./src/*/*.c -I ./include -I ./mlx -D BUFFER_SIZE=1 -o $(NAME)
 	install_name_tool -change $(MLX) $(MLX_DIR)/$(MLX) $(NAME)
 
 run : $(NAME)

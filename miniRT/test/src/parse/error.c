@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.h                                     :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/04 15:43:39 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/01/06 18:10:54 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/01/11 20:29:35 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_UTILS_H
-# define COMMON_UTILS_H
+#include "parse.h"
 
-# define PI 3.1415926535897932385
+void	error_not_aligned(void)
+{
+	printf("VECTOR IS NOT AXIS-ALIGNED\n");
+	exit(0);
+}
 
-double	deg_to_rad(double degrees);
+void	malloc_error(void)
+{
+	printf("MEMORY ALLOCATION FAILED\n");
+	printf("EXIT PROGRAM\n");
+	exit(0);
+}
 
-#endif
+void	parse_error(void)
+{
+	printf("WRONG DATA FORMAT\n");
+	printf("EXIT PROGRAM\n");
+	exit(0);
+}

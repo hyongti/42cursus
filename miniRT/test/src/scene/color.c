@@ -6,11 +6,11 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:53:16 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/04 15:42:57 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/11 11:33:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
+#include "utils.h"
 
 t_color	color(double x, double y, double z)
 {
@@ -34,7 +34,17 @@ int		color_to_int(t_color pixel_color)
 	return ((r << 16) + (g << 8) + b);
 }
 
-// void	write_color(t_vec vec)
-// {
-// 	printf("%d %d %d\n", (int)(vec.x * 255.999), (int)(vec.y * 255.999), (int)(vec.z * 255.999));
-// }
+int		get_r(int rgb)
+{
+	return (rgb >> 16 & 0xFF);
+}
+
+int		get_g(int rgb)
+{
+	return (rgb >> 8 & 0xFF);
+}
+
+int		get_b(int rgb)
+{
+	return (rgb & 0xFF);
+}
