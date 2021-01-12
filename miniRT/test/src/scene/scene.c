@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 19:46:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/05 12:37:24 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/11 10:01:00 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		scene_init(t_scene *scene)
 	scene->objs = NULL;
 	scene->cam_list = NULL;
 	scene->cam_onair = NULL;
+	scene->background = NULL;
 }
 
 t_camera	*cam_init(t_point lookfrom, t_vec lookdir, double hfov)
@@ -32,7 +33,7 @@ t_camera	*cam_init(t_point lookfrom, t_vec lookdir, double hfov)
 	return (cam);
 }
 
-t_camera	*set_cam(t_camera *cam, t_scene *scene)
+void			set_cam(t_camera *cam, t_scene *scene)
 {
 	double		theta;
 	double		half_width;
@@ -42,10 +43,10 @@ t_camera	*set_cam(t_camera *cam, t_scene *scene)
 	t_vec		v;
 	t_vec		w;
 	t_vec		vup;
-	t_vec		lookat;
 
-	lookat = v_plus(cam->origin, cam->dir);
-	vup = vec(0, 1, 0);
+	if (cam->dir.x == 0 && cam->dir.z == 0)
+		cam->dir.z = 1e-6;
+	vup = vec(0.0, 1.0, 0.0);
 	theta = deg_to_rad(cam->hfov);
 	half_width = tan(theta / 2.0);
 	viewport_width = 2.0 * half_width;
@@ -53,28 +54,8 @@ t_camera	*set_cam(t_camera *cam, t_scene *scene)
 	w = v_normalize(v_multiply(cam->dir, -1));
 	u = v_normalize(v_cross(vup, w));
 	v = v_cross(w, u);
+	// printf("%f %f %f %f\n", v.x, v.y, v.z, v_len(v));
 	cam->horizontal = v_multiply(u, viewport_width);
 	cam->vertical = v_multiply(v, viewport_height);
 	cam->leftbottom = v_minus(v_minus(v_minus(cam->origin, v_multiply(cam->horizontal, 0.5)), v_multiply(cam->vertical, 0.5)), w);
-	return (cam);
 }
-// t_image			image(int width, int height)
-// {
-// 	t_image		image;
-
-// 	image.width = width;
-// 	image.height = height;
-// 	image.ratio = (double)width / (double)height;
-// 	return (image);
-// }
-
-// t_cam			cam_set
-// {
-// 	t_cam		cam;
-
-// 	double		viewport_height = 2.0;
-// 	double		viewport_width = image.ratio * viewport_height;
-// 	double		focal_length = 1.0;
-
-
-// }

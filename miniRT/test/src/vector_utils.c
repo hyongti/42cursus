@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:49:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2020/12/10 21:04:39 by root             ###   ########.fr       */
+/*   Updated: 2021/01/11 11:38:18 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector_utils.h"
+#include "utils.h"
 
 t_point	point(double x, double y, double z)
 {
@@ -108,8 +108,18 @@ t_vec	v_cross(t_vec vec1, t_vec vec2)
 {
 	t_vec	result;
 
-	result.x = vec1.y * vec2.z - vec1.z * vec2.z;
+	result.x = vec1.y * vec2.z - vec1.z * vec2.y;
 	result.y = vec1.z * vec2.x - vec1.x * vec2.z;
 	result.z = vec1.x * vec2.y - vec1.y * vec2.x;
+	return (result);
+}
+
+t_vec	v_min(t_vec vec1, t_vec vec2)
+{
+	t_vec	result;
+
+	result.x = fmin(vec1.x, vec2.x);
+	result.y = fmin(vec1.y, vec2.y);
+	result.z = fmin(vec1.z, vec2.z);
 	return (result);
 }
