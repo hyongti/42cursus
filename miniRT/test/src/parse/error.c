@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 18:10:54 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/13 15:54:29 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:29:05 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static int	sub_data_check(char *data)
 	while (ft_isdouble(split[i]) == 1)
 		i++;
 	if (split[i] == NULL)
+	{
+		free(split);
 		return (1);
+	}
 	return (0);
 }
 

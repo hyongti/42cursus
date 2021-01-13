@@ -6,22 +6,21 @@
 #    By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 18:59:15 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/01/13 16:38:08 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/01/13 19:24:28 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	minirt
-CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
-MAKE	=	make
-INCLUDE	=	-I./
-LIBDIR	=	./libft
-LIBFT	=	libft.a
-MLXDIR	=	./mlx
-MLX		=	libmlx.dylib
-LIBFLAG	=	-L $(MLXDIR) -lmlx -framework OpenGl -framework Appkit -L $(LIBDIR) -lft
-INCLUDE	=	-I./include
-SRC_CONTROL_NAME	=	control.c \
+NAME	= minirt
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
+MAKE	= make
+INCLUDE	= -I./include -I./mlx
+LIBDIR	= ./libft
+LIBFT	= libft.a
+MLXDIR	= ./mlx
+MLX		= libmlx.dylib
+LIBFLAG	= -L $(MLXDIR) -lmlx -framework OpenGl -framework Appkit -L $(LIBDIR) -lft
+SRC_CONTROL_NAME	= control.c \
 					control2.c \
 					control_object.c \
 					control_object_translate.c \
@@ -38,22 +37,23 @@ SRC_CONTROL_NAME	=	control.c \
 					control_filter.c \
 					control_camera.c \
 					control_camera2.c \
-					console_msg.c 
-SRC_PARSE_NAME		=	read.c \
+					console_msg.c \
+					save.c
+SRC_PARSE_NAME		= read.c \
 					parse.c \
 					parse2.c \
-					parse2.c \
+					parse3.c \
 					parse_utils.c \
 					error.c \
 					error2.c
-SRC_SCENE_NAME		=	make_object.c \
+SRC_SCENE_NAME		= make_object.c \
 					make_object2.c \
 					make_object3.c \
 					make_light.c \
 					object_utils.c \
 					color.c \
 					scene.c
-SRC_TRACE_NAME		=	filter.c \
+SRC_TRACE_NAME		= filter.c \
 					hit_cone.c \
 					hit_cube.c \
 					hit_cylinder.c \
@@ -64,6 +64,7 @@ SRC_TRACE_NAME		=	filter.c \
 					hit_square.c \
 					hit_triangle.c \
 					hit_utils.c \
+					hit_utils2.c \
 					hit.c \
 					phong_parallel.c \
 					phong_spot.c \
@@ -73,7 +74,7 @@ SRC_TRACE_NAME		=	filter.c \
 					render_preview.c \
 					skybox.c \
 					texture.c
-SRC_UTILS_NAME		=	common_utils.c \
+SRC_UTILS_NAME		= common_utils.c \
 					matrix_utils.c \
 					matrix_utils2.c \
 					matrix_utils3.c \
@@ -85,19 +86,28 @@ SRC_PARSE = $(addprefix src/parse/, $(SRC_PARSE_NAME))
 SRC_SCENE = $(addprefix src/scene/, $(SRC_SCENE_NAME))
 SRC_TRACE = $(addprefix src/trace/, $(SRC_TRACE_NAME))
 SRC_UTILS = $(addprefix src/utils/, $(SRC_UTILS_NAME))
+SRC_MAIN = ./src/main.c
 
-SRC = main.c $(SRC_CONTROL) $(SRC_PARSE) $(SRC_SCENE) $(SRC_TRACE) $(SRC_UTILS)
+SRC = $(SRC_MAIN) $(SRC_CONTROL) $(SRC_PARSE) $(SRC_SCENE) $(SRC_TRACE) $(SRC_UTILS)
 OBJ = $(SRC:.c=.o)
+
+# .SUFFIXES : .c
+
+# .c.o :
+# 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(OBJ)
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDE)
 
 all : $(NAME)
 
 clean :
-	$(MAKE) -C $(LIBFT_DIR) clean;
+	$(MAKE) -C $(LIBDIR) clean;
 	$(RM) $(OBJ)
 
 fclean : clean
-	$(MAKE) -C $(LIBFT_DIR) fclean;
-	$(MAKE) -C $(MLX_DIR) clean;
+	$(MAKE) -C $(LIBDIR) fclean;
+	$(MAKE) -C $(MLXDIR) clean;
 	$(RM) $(NAME)
 
 re : fclean all
@@ -105,10 +115,13 @@ re : fclean all
 bonus : all
 
 $(NAME) : $(OBJ) $(MLXDIR)/$(MLX) $(LIBDIR)/$(LIBFT)
-	$(CC) $(CFLAGS) $(LIBFLAG) $(OBJ) $(INCLUDE) -o $@
+	$(CC) $(CFLAGS) $(LIBFLAG) $(OBJ) $(INCLUDE) -o $(NAME)
 	install_name_tool -change $(MLX) $(MLXDIR)/$(MLX) $(NAME)
-	# gcc -Wall -Wextra -Werror -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit *.c ./libft/*.c ./src/*.c ./src/*/*.c -I ./include -I ./mlx -D BUFFER_SIZE=1 -o $(NAME)
-	# gcc -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit ./libft/*.c ./src/*.c ./src/*/*.c -I ./include -I ./mlx -D BUFFER_SIZE=1 -o $(NAME)
-	# install_name_tool -change $(MLX) $(MLX_DIR)/$(MLX) $(NAME)
+
+$(MLXDIR)/$(MLX) :
+	@$(MAKE) -C $(MLXDIR) all
+
+$(LIBDIR)/$(LIBFT) :
+	@$(MAKE) -C $(LIBDIR) all
 
 .PHONY : all clean re ppm open run

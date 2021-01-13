@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 11:34:03 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/13 03:17:34 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:54:44 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void			filter(t_color *pixel_color, t_global *global)
 	else if (global->filter_type == BLUE)
 		filter_blue(pixel_color);
 	else if (global->filter_type == DEFAULT)
-		return ;
+		*pixel_color = v_min(*pixel_color, vec(1.0, 1.0, 1.0));
 	*pixel_color = v_min(*pixel_color, vec(1.0, 1.0, 1.0));
 }

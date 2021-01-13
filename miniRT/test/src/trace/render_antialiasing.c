@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 15:48:46 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/13 04:56:32 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:50:52 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void			render(t_cntl *cntl)
 	i = -1;
 	while (++i < COUNT)
 		pthread_join(p_thread[i], NULL);
+	printf("RENDER FINISHED\n");
 }
