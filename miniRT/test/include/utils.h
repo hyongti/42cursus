@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 08:51:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 16:53:14 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 03:17:17 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define PI 3.1415926535897932385
 
 # include "structures.h"
+# include "parse.h"
 # include "../libft/get_next_line.h"
 # include <math.h>
 # include <stdio.h>
@@ -66,20 +67,20 @@ void			obj_add_back(t_objects **lst, t_objects *new);
 ** color utils
 */
 
-t_color color(double x, double y, double z);
-int		color_to_int(t_color pixel_color);
+t_color			color(double x, double y, double z);
+int				color_to_int(t_color pixel_color);
 
 /*
 ** common utils
 */
 
-double		deg_to_rad(double degrees);
-int			is_aligned(t_vec vec);
-double		random_double(void);
-double		saturate(double value);
-int			saturate_min_max_int(int value, int min, int max);
-int			get_r(int rgb);
-int			get_g(int rgb);
-int			get_b(int rgb);
+double			deg_to_rad(double degrees);
+int				is_aligned(t_vec vec);
+double			random_double(void);
+double			saturate(double value);
+int				saturate_min_max_int(int value, int min, int max);
+int				get_r(int rgb);
+int				get_g(int rgb);
+int				get_b(int rgb);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:09:12 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 21:08:42 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:25:40 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int		main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
+		if (ft_strncmp(argv[1], ".rt", 10) == 0)
+		{
+			printf("FIRST ARG MUST BE END WITH '.rt'\n");
+			exit(0);
+		}
 		cntl_init(&cntl, argv[1]);
 		my_mlx_control(&cntl);
 	}

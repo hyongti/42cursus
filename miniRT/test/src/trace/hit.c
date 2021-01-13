@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:20:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 18:23:43 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 04:52:54 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			hit(t_ray *r, t_objects *objects, t_hit_record *rec)
 	tmp_rec = *rec;
 	hit_anything = FALSE;
 	while (objects)
-	{ 
+	{
 		if (hit_objects(r, objects, &tmp_rec))
 		{
 			hit_anything = TRUE;

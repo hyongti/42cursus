@@ -6,19 +6,19 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 11:48:47 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/12 21:23:18 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 03:09:12 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTROL_H
 # define CONTROL_H
 
-#include "scene.h"
-#include "trace.h"
-#include "utils.h"
-#include "parse.h"
-#include "bitmap.h"
-#include "key_macro.h"
+# include "scene.h"
+# include "trace.h"
+# include "utils.h"
+# include "parse.h"
+# include "bitmap.h"
+# include "key_macro.h"
 
 # define DEFM 0
 # define OBJM 1
@@ -30,7 +30,7 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		cntl_init(t_cntl *cntl, char *filepath);
 void		cntl_display_resolution(t_cntl *cntl);
 void		cntl_init_except_resolution(t_cntl *cntl, char *argv);
-int			cntl_click_x(void);//int focus, t_cntl *cntl);
+int			cntl_click_x(void);
 void		my_mlx_control(t_cntl *cntl);
 int			cntl_close(void);
 int			cntl_mouse_click(int button, int x, int y, t_cntl *cntl);
@@ -53,6 +53,12 @@ void		translate_cube(int keycode, t_cntl *cntl);
 void		translate_cube_x(int keycode, t_cntl *cntl);
 void		translate_cube_y(int keycode, t_cntl *cntl);
 void		translate_cube_z(int keycode, t_cntl *cntl);
+void		pyramid_z_move_neg(t_cntl *c);
+void		pyramid_z_move_pos(t_cntl *c);
+void		pyramid_y_move_neg(t_cntl *c);
+void		pyramid_y_move_pos(t_cntl *c);
+void		pyramid_x_move_neg(t_cntl *c);
+void		pyramid_x_move_pos(t_cntl *c);
 void		translate_pyramid(int keycode, t_cntl *cntl);
 void		cntl_object_scale(int keycode, t_cntl *cntl);
 void		scale_sphere(int keycode, t_cntl *cntl);
@@ -105,4 +111,4 @@ void		bmp_save_direct(t_cntl *cntl);
 void		cntl_save(t_cntl *cntl);
 void		write_bmp(t_data *image, t_scene *scene, int fd);
 
-# endif
+#endif

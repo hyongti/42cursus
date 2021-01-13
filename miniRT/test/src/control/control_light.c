@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:04:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/12 21:08:59 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:35:05 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	cntl_light_select(t_cntl *cntl)
 {
 	t_objects	*temp;
 
-	if (cntl->selected == 0 || cntl->selected->next == 0)  
+	if (cntl->selected == 0 || cntl->selected->next == 0)
 		temp = (t_objects *)cntl->scene->objs;
 	else
 		temp = (t_objects *)cntl->selected->next;
@@ -61,8 +61,8 @@ void	cntl_light_select(t_cntl *cntl)
 		cntl->selected = temp;
 	printf("COORDINATES OF LIGHT\n%f %f %f\n",
 		((t_spot_light *)(cntl->selected->object))->p.x
-		,((t_spot_light *)(cntl->selected->object))->p.y
-		,((t_spot_light *)(cntl->selected->object))->p.z);
+		, ((t_spot_light *)(cntl->selected->object))->p.y
+		, ((t_spot_light *)(cntl->selected->object))->p.z);
 }
 
 void	cntl_light_mode_off(t_cntl *cntl)

@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 22:11:44 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 12:17:04 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:38:34 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,37 +56,4 @@ void		scale_cylinder(int keycode, t_cntl *cntl)
 		((t_cylinder *)cntl->selected->object)->radius -= 0.25;
 		((t_cylinder *)cntl->selected->object)->len -= 0.25;
 	}
-}
-
-void		scale_cone(int keycode, t_cntl *cntl)
-{
-	if (keycode == KEY_AR_U)
-		((t_cone *)cntl->selected->object)->height += 0.25;
-	else if (keycode == KEY_AR_D)
-		((t_cone *)cntl->selected->object)->height -= 0.25;
-}
-
-void		scale_cube(int keycode, t_cntl *cntl)
-{
-	double	scale;
-	t_cube	*temp;
-
-	scale = (keycode == KEY_AR_U) ? 0.25 : -0.25;
-	printf("%f\n", ((t_cube *)cntl->selected->object)->len);
-	temp = cube(((t_cube *)cntl->selected->object)->p,
-				((t_cube *)cntl->selected->object)->len + scale);
-	free(cntl->selected->object);
-	cntl->selected->object = temp;
-}
-
-void		scale_pyramid(int keycode, t_cntl *cntl)
-{
-	double		scale;
-	t_pyramid	*temp;
-
-	scale = (keycode == KEY_AR_U) ? 0.25 : -0.25;
-	temp = pyramid(((t_pyramid *)cntl->selected->object)->p,
-		((t_pyramid *)cntl->selected->object)->len + scale);
-	free(cntl->selected->object);
-	cntl->selected->object = temp;
 }

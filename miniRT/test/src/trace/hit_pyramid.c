@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 12:24:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 17:44:23 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 03:56:00 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int			check_rotate_pyramid(t_ray *r, t_objects *obj, t_hit_record *rec)
 	return (hit_result);
 }
 
-// static void	update_record(t_hit_record *temp_rec, t_hit_record *rec, int *hit)
-// {
-// 	*hit = TRUE;
-// 	temp_rec->t_max = temp_rec->t;
-// 	*rec = *temp_rec;
-// }
+static void	update_record(t_hit_record *tmp_rec, t_hit_record *rec, int *hit)
+{
+	*hit = TRUE;
+	tmp_rec->t_max = tmp_rec->t;
+	*rec = *tmp_rec;
+}
 
 int			hit_pyramid(t_ray *r, t_objects *obj, t_hit_record *rec)
 {
@@ -64,22 +64,14 @@ int			hit_pyramid(t_ray *r, t_objects *obj, t_hit_record *rec)
 	o = *obj;
 	pm = obj->object;
 	while (i < 4)
-	{	
+	{
 		o.object = pm->tr[i];
 		if (hit_triangle(r, &o, &tmp_rec))
-		{
-			hit_anything = TRUE;
-			tmp_rec.t_max = tmp_rec.t;
-			*rec = tmp_rec;
-		}
+			update_record(&tmp_rec, rec, &hit_anything);
 		i++;
 	}
 	o.object = pm->sq;
 	if (hit_square(r, &o, &tmp_rec))
-	{
-		hit_anything = TRUE;
-		tmp_rec.t_max = tmp_rec.t;
-		*rec = tmp_rec;
-	}
+		update_record(&tmp_rec, rec, &hit_anything);
 	return (hit_anything);
 }

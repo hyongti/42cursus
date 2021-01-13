@@ -6,13 +6,13 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:28:26 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 20:19:48 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:30:08 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "control.h"
 
-static void		default_msg()
+static void		default_msg(void)
 {
 	system("clear");
 	printf("* ~ * ~ * DEFAULT MODE * ~ * ~ *\n");
@@ -30,19 +30,19 @@ static void		default_msg()
 	printf("* LEFT BUTTON  : OBJECT SELECT *\n");
 }
 
-static void		object_msg()
+static void		object_msg(void)
 {
 	system("clear");
 	printf("* ~ * ~ OBJECT MODE ~ * ~ *\n");
 }
 
-static void		camera_msg()
+static void		camera_msg(void)
 {
 	system("clear");
 	printf("* ~ * ~ CAMERA MODE ~ * ~ *\n");
 }
 
-static void		light_msg()
+static void		light_msg(void)
 {
 	system("clear");
 	printf("* ~ * ~ LIGHT MODE ~ * ~ *\n");

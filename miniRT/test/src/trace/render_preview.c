@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendor_preview.c                                   :+:      :+:    :+:   */
+/*   render_preview.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 23:21:14 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/12 22:17:13 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 04:57:13 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void		pixel_put_preview(t_scene *s, t_ray *r, int *i, int light_on)
 	r->origin = s->cam_onair->origin;
 	r->dir = v_normalize(v_minus(v_plus(v_plus(s->cam_onair->leftbottom,
 				v_multiply(s->cam_onair->horizontal, uv[1])),
-				v_multiply(s->cam_onair->vertical, uv[0])), s->cam_onair->origin));
+				v_multiply(s->cam_onair->vertical, uv[0])),
+										s->cam_onair->origin));
 	pixel_color = v_plus(pixel_color, ray_color_preview(r, s, light_on));
 	pixel_color = v_plus(pixel_color, s->global.ambient);
 	filter(&pixel_color, &s->global);
@@ -56,7 +57,7 @@ static void		*render_preview_thread(void *thread_data)
 	return (NULL);
 }
 
-void		render_preview(t_cntl *cntl)
+void			render_preview(t_cntl *cntl)
 {
 	pthread_t		p_thread[COUNT];
 	t_pth_data		data[COUNT];

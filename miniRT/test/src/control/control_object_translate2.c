@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 19:42:08 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 18:06:06 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:40:31 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		translate_cube_x(int keycode, t_cntl *cntl)
 {
 	int	i;
 
-	i = -1;	
+	i = -1;
 	if (keycode == KEY_D)
 	{
 		while (++i < 6)
@@ -93,29 +93,4 @@ void		translate_cone(int keycode, t_cntl *cntl)
 		((t_cone *)(cntl->selected->object))->p.y -= 0.3;
 	else if (keycode == KEY_E)
 		((t_cone *)(cntl->selected->object))->p.y += 0.3;
-}
-
-void		translate_triangle(int keycode, t_cntl *cntl)
-{
-	int	i;
-
-	i = -1;
-	if (keycode == KEY_W)
-		while (++i < 3)
-			((t_triangle *)(cntl->selected->object))->p[i].z -= 0.3;
-	else if (keycode == KEY_S)
-		while (++i < 3)
-			((t_triangle *)(cntl->selected->object))->p[i].z += 0.3;
-	else if (keycode == KEY_A)
-		while (++i < 3)
-			((t_triangle *)(cntl->selected->object))->p[i].x -= 0.3;
-	else if (keycode == KEY_D)
-		while (++i < 3)
-			((t_triangle *)(cntl->selected->object))->p[i].x += 0.3;
-	else if (keycode == KEY_Q)
-		while (++i < 3)
-			((t_triangle *)(cntl->selected->object))->p[i].y -= 0.3;
-	else if (keycode == KEY_E)
-		while (++i < 3)
-			((t_triangle *)(cntl->selected->object))->p[i].y += 0.3;
 }

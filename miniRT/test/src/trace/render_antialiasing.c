@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 15:48:46 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 20:41:37 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 04:56:32 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ static void		pixel_put(t_scene *s, t_ray *r, int *i)
 		r->origin = s->cam_onair->origin;
 		r->dir = v_normalize(v_minus(v_plus(v_plus(s->cam_onair->leftbottom,
 					v_multiply(s->cam_onair->horizontal, uv[1])),
-					v_multiply(s->cam_onair->vertical, uv[0])), s->cam_onair->origin));
+					v_multiply(s->cam_onair->vertical, uv[0])),
+									s->cam_onair->origin));
 		pixel_color = v_plus(pixel_color, ray_color(r, s));
 	}
-	pixel_color = v_multiply(pixel_color, 1.0 / (double)s->global.samples_per_pixel);
+	pixel_color = v_multiply(pixel_color, 1.0
+						/ (double)s->global.samples_per_pixel);
 	pixel_color = v_plus(pixel_color, s->global.ambient);
 	filter(&pixel_color, &s->global);
 	my_mlx_pixel_put(s->img, i[1], s->canvas.height - i[0] - 1,
@@ -62,7 +64,7 @@ static void		*render_thread(void *thread_data)
 	return (NULL);
 }
 
-void		render(t_cntl *cntl)
+void			render(t_cntl *cntl)
 {
 	pthread_t		p_thread[COUNT];
 	t_pth_data		data[COUNT];

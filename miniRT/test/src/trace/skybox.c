@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 03:14:18 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 11:13:24 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 04:55:31 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int		saturate_h(int h, int l, t_hit_record *rec)
 	return (h);
 }
 
-t_color		albedo_skybox(t_hit_record *rec)
+t_color			albedo_skybox(t_hit_record *rec)
 {
 	int			wh[2];
 	int			icolor;
@@ -71,9 +71,9 @@ t_color		albedo_skybox(t_hit_record *rec)
 					c_scale * get_b(icolor)));
 }
 
-t_color		color_background(t_ray *r, t_scene *s, t_hit_record *rec)
+t_color			color_background(t_ray *r, t_scene *s, t_hit_record *rec)
 {
-	double			t;
+	double		t;
 
 	if (s->background == NULL)
 	{

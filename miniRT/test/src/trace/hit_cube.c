@@ -6,13 +6,13 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 23:01:38 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 10:34:45 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 03:52:58 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trace.h"
 
-int		hit_cube(t_ray *r, t_objects *obj, t_hit_record *rec)
+int			hit_cube(t_ray *r, t_objects *obj, t_hit_record *rec)
 {
 	t_hit_record	tmp_rec;
 	t_objects		sq;
@@ -47,7 +47,7 @@ static void	world2object_cb(t_matrix44 *rotate, t_vec *offset, t_ray *ray)
 
 static void	free_cube(t_cube *cb)
 {
-	int		i;
+	int				i;
 
 	i = -1;
 	while (++i < 6)

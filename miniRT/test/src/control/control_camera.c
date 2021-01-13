@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:18:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/10 19:24:20 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:31:45 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ void	cntl_camera_on(t_cntl *cntl)
 {
 	cntl->mode = 2;
 	printf("< camera mode >\n[right arrow] key : next camera\n");
-	printf("[w,a,s,d] key : move\n[q,e] key : fov\n[mouse click, wheel] : rotate\n");
+	printf("[w,a,s,d] key : move\n[q,e] key : fov\n");
+	printf("[mouse click, wheel] : rotate\n");
 	printf("[esc] key : DEFAULT MODE\n");
 	printf("COORDINATES OF CAMERA.\n%f %f %f\n",
-	cntl->scene->cam_onair->origin.x, cntl->scene->cam_onair->origin.y, cntl->scene->cam_onair->origin.z);
+	cntl->scene->cam_onair->origin.x,
+	cntl->scene->cam_onair->origin.y,
+	cntl->scene->cam_onair->origin.z);
 }
 
 void	cntl_select_camera(t_cntl *cntl)
@@ -43,13 +46,15 @@ void	cntl_select_camera(t_cntl *cntl)
 	{
 		cntl->scene->cam_onair = (t_camera *)cntl->scene->cam_list->object;
 		printf("COORDINATES OF CAMERA\n%f %f %f\n",
-		cntl->scene->cam_onair->origin.x, cntl->scene->cam_onair->origin.y, cntl->scene->cam_onair->origin.z);
+		cntl->scene->cam_onair->origin.x,
+		cntl->scene->cam_onair->origin.y, cntl->scene->cam_onair->origin.z);
 	}
 	else
 	{
 		cntl->scene->cam_onair = ((t_objects *)temp->next)->object;
 		printf("COORDINATES OF CAMERA\n%f %f %f\n",
-		cntl->scene->cam_onair->origin.x, cntl->scene->cam_onair->origin.y, cntl->scene->cam_onair->origin.z);
+		cntl->scene->cam_onair->origin.x,
+		cntl->scene->cam_onair->origin.y, cntl->scene->cam_onair->origin.z);
 	}
 }
 

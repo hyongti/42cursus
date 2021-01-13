@@ -6,14 +6,14 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 18:16:58 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 12:11:09 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 05:44:56 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-#include "mlx.h"
+# include "mlx.h"
 
 /*
 ** filter type
@@ -77,7 +77,7 @@
 ** common structure
 */
 
-typedef struct 	s_vec
+typedef struct	s_vec
 {
 	double		x;
 	double		y;
@@ -198,8 +198,16 @@ typedef struct	s_texture
 }				t_texture;
 
 /*
-**
+** scene structures
 */
+
+typedef struct	s_cam_ray
+{
+	t_vec		u;
+	t_vec		v;
+	t_vec		w;
+	t_vec		vup;
+}				t_cam_ray;
 
 typedef struct	s_objects
 {
@@ -290,7 +298,6 @@ typedef struct	s_pth_data
 	t_cntl		*c;
 }				t_pth_data;
 
-
 typedef struct	s_tr_set
 {
 	t_vec		p;
@@ -302,4 +309,84 @@ typedef struct	s_tr_set
 	double		t;
 	double		denominator;
 }				t_tr_set;
-# endif
+
+typedef struct	s_sp_set
+{
+	t_vec		oc;
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		sqrtd;
+	double		root;
+}				t_sp_set;
+
+typedef struct	s_disc_set
+{
+	double		t;
+	double		denom;
+	t_point		to_hit;
+	t_point		p;
+}				t_disc_set;
+
+typedef struct	s_cy_set
+{
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		sqrtd;
+	double		root;
+	double		len;
+	t_vec		delp;
+	t_point		pa;
+	t_point		p;
+	t_vec		n;
+}				t_cy_set;
+
+typedef struct	s_light_set
+{
+	t_color		diffuse;
+	t_color		specular;
+	t_vec		light_dir;
+	t_vec		unit_light_dir;
+	t_vec		view_dir;
+	t_vec		reflect_dir;
+	t_vec		unit_norm;
+	t_ray		to_light_ray;
+	double		lux;
+	double		distance_attenuation;
+}				t_light_set;
+
+typedef struct	s_diffuse
+{
+	double		kd;
+	t_color		strength;
+}				t_diffuse;
+
+typedef struct	s_specular
+{
+	double		ks;
+	double		ksn;
+	double		focus;
+	t_color		strength;
+}				t_specular;
+
+typedef struct	s_co_set
+{
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		sqrtd;
+	double		root;
+	double		len;
+	double		cosa;
+	double		sina;
+	t_vec		delp;
+	t_point		pa;
+	t_point		p;
+	t_vec		n;
+}				t_co_set;
+
+#endif

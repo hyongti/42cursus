@@ -6,11 +6,11 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 20:11:05 by hyongti           #+#    #+#             */
-/*   Updated: 2021/01/11 12:22:30 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 05:45:02 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "light.h"
+#include "scene.h"
 
 t_spot_light			*spot_light(t_point point, double ratio, t_color color)
 {

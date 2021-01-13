@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 02:44:24 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/12 21:07:41 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 05:53:43 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,45 +30,23 @@ int		check_shadow(t_ray *ray, t_objects *objects)
 	return (hit_anything);
 }
 
-t_color	phong_color_spot(t_ray *r, t_spot_light *light, t_hit_record *rec, t_objects *objects_for_check)
+t_color	phong_color_spot(t_ray *r, t_spot_light *light, t_hit_record *rec,
+												t_objects *objects_for_check)
 {
-	t_color		ambient;
-	t_color		diffuse;
-	t_color		specular;
-	t_vec		light_dir;
-	t_vec		view_dir;
-	t_vec		reflect_dir;
-	t_vec		unit_norm;
-	t_ray		to_light_ray;
-	t_color		albedo;
-	double		lux = 50;
-	double		ka;
-	double		kd;
-	double		ks;
-	double		ksn;
-	double		spec;
-	double		distance_attenuation;
+	t_diffuse		diffuse;
+	t_specular		specular;
+	t_color			strength;
+	t_light_set		l;
+	t_color			albedo;
 
-	unit_norm = v_normalize(rec->normal);
-	view_dir = v_multiply(r->dir, -1);
-	light_dir = v_minus(light->p, rec->p);
-	to_light_ray = ray(v_plus(rec->p, v_multiply(rec->normal, 1e-4)), light_dir);
-	if (check_shadow(&to_light_ray, objects_for_check))
+	l.lux = 50;
+	get_light_set(&l, rec, r, light);
+	if (check_shadow(&l.to_light_ray, objects_for_check))
 		return (color(0, 0, 0));
-	light_dir = v_normalize(light_dir);
-	reflect_dir = reflect(v_multiply(light_dir, -1), unit_norm);
-	ka = 0.1; // ambient strength;
-	kd = fmax(v_dot(unit_norm, light_dir), 0.0);// diffuse strength;
-	ks = 0.5; // specular strength;
-	ksn = 256;
-	albedo = v_multiply(light->color, lux * light->brightness);
-	ambient = v_multiply(albedo, ka);
-	diffuse = v_multiply(albedo, kd);
-
-	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), ksn);
-	specular = v_multiply(v_multiply(albedo, kd), spec);
-
-	distance_attenuation = 1.0 / v_len_squared(v_minus(light->p, rec->p));
-
-	return (v_multiply(v_plus(v_plus(ambient, diffuse), specular), distance_attenuation));
+	albedo = v_multiply(light->color, l.lux * light->brightness);
+	diffuse = get_diffuse_strength(l, albedo);
+	specular = get_specular_strength(l, albedo, diffuse);
+	strength = v_plus(diffuse.strength, specular.strength);
+	l.distance_attenuation = 1.0 / v_len_squared(v_minus(light->p, rec->p));
+	return (v_multiply(strength, l.distance_attenuation));
 }

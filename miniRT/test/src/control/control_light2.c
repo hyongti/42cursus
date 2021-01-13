@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 19:31:32 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 20:23:31 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:35:46 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	cntl_light_bright_up(t_cntl *cntl)
 {
 	double		brightness;
-	t_color 	*light_color;
+	t_color		*light_color;
 
 	brightness = ((t_spot_light *)(cntl->selected->object))->brightness;
 	light_color = &((t_spot_light *)(cntl->selected->object))->color;
@@ -70,6 +70,6 @@ void	cntl_light_translate(int keycode, t_cntl *cntl)
 		((t_spot_light *)(cntl->selected->object))->p.y += 0.3;
 	printf("COORDINATES OF LIGHT\n%f %f %f\n",
 		((t_spot_light *)(cntl->selected->object))->p.x
-		,((t_spot_light *)(cntl->selected->object))->p.y
-		,((t_spot_light *)(cntl->selected->object))->p.z);
+		, ((t_spot_light *)(cntl->selected->object))->p.y
+		, ((t_spot_light *)(cntl->selected->object))->p.z);
 }

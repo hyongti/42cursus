@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_cylinder->c                                     :+:      :+:    :+:   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:00:32 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/10 23:25:37 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 04:50:42 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trace.h"
 
-static void	get_cylinder_uv(t_hit_record *rec, t_cylinder *cylinder, double len)
+static void			get_cylinder_uv(t_hit_record *rec, t_cylinder *cylinder,
+																	double len)
 {
-	double	phi;
-	double  sines;
+	double			phi;
+	double			sines;
 
 	phi = 0.0;
 	if (is_aligned(cylinder->vec) == X)
@@ -29,100 +30,83 @@ static void	get_cylinder_uv(t_hit_record *rec, t_cylinder *cylinder, double len)
 	sines = sin(50 * rec->u) * sin(50 * rec->v);
 }
 
-int		hit_disc(t_ray *r, t_objects *obj, t_hit_record *rec)
+static t_cy_set		get_cylinder_discriminant(t_cylinder *cylinder, t_ray *r)
 {
-	double	denom;
-	double	t;
-	t_cylinder *cylinder;
-	t_vec	to_hit;
-	t_point	p;
+	t_cy_set		cy;
 
-	cylinder = (t_cylinder *)obj->object;
-	denom = v_dot(cylinder->vec, r->dir);
-	if (fabs(denom) < 1e-6)
-	 	return (FALSE);
-	if (cylinder->vec.z < 0)
-	{
-		to_hit = v_minus(cylinder->p, r->origin);
-		t = v_dot(to_hit, cylinder->vec) / denom;
-	}
-	else
-	{
-		to_hit = v_minus(v_plus(cylinder->p, v_multiply(cylinder->vec, cylinder->len)), r->origin);
-		t = v_dot(to_hit, cylinder->vec) / denom;
-	}
-	if (t < rec->t_min || t > rec->t_max)
+	cy.delp = v_minus(r->origin, cylinder->p);
+	cylinder->vec = v_normalize(cylinder->vec);
+	cy.a = v_len_squared(v_minus(r->dir,
+			v_multiply(cylinder->vec, v_dot(r->dir, cylinder->vec))));
+	cy.b = v_dot(v_minus(r->dir, v_multiply(cylinder->vec,
+				v_dot(r->dir, cylinder->vec))),
+				v_minus(cy.delp, v_multiply(cylinder->vec,
+				v_dot(cy.delp, cylinder->vec))));
+	cy.c = v_len_squared(v_minus(cy.delp, v_multiply(cylinder->vec,
+				v_dot(cy.delp, cylinder->vec))))
+				- cylinder->radius * cylinder->radius;
+	cy.discriminant = cy.b * cy.b - cy.a * cy.c;
+	return (cy);
+}
+
+static	int			get_cylinder_far_hitpoint(t_cy_set *cy,
+				t_ray *r, t_cylinder *cylinder)
+{
+	cy->root = (-cy->b + cy->sqrtd) / cy->a;
+	cy->p = at(cy->root, *r);
+	if ((cy->len = v_dot(v_minus(cy->p, cylinder->p), cylinder->vec)) < 0)
 		return (FALSE);
-	p = at(t, *r);
-	if (cylinder->vec.z < 0)
-	{
-		if (v_len_squared(v_minus(cylinder->p, p)) > cylinder->radius * cylinder->radius)
-			return (FALSE);
-	}
+	if (cy->len <= cylinder->len)
+		cy->n = v_normalize(v_minus(cy->p,
+				at(cy->len, ray(cylinder->p, cylinder->vec))));
 	else
-	{
-		if (v_len_squared(v_minus(v_plus(cylinder->p, v_multiply(cylinder->vec, cylinder->len)), p)) > cylinder->radius * cylinder->radius)
-			return (FALSE);
-	}
-	
-	rec->normal = cylinder->vec;
-	get_record(rec, t, obj, r);
-	set_face_normal(*r, rec);
+		return (FALSE);
 	return (TRUE);
 }
 
-int			hit_cylinder(t_ray *r, t_objects *obj, t_hit_record *rec)
+static	int			get_cylinder_hitpoint(t_cy_set *cy, t_hit_record *rec,
+										t_ray *r, t_objects *obj)
 {
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-	double	sqrtd;
-	double	root;
-	double	len;
-	t_cylinder	*cylinder;
-	t_vec	n;
-	t_vec	del_p;
-	t_point	p;
+	t_cylinder		*cylinder;
 
 	cylinder = (t_cylinder *)obj->object;
-	del_p = v_minus(r->origin, cylinder->p);
-	cylinder->vec = v_normalize(cylinder->vec);
-	a = v_len_squared(v_minus(r->dir, v_multiply(cylinder->vec, v_dot(r->dir, cylinder->vec))));
-	b = v_dot(v_minus(r->dir, v_multiply(cylinder->vec, v_dot(r->dir, cylinder->vec))), 
-				v_minus(del_p, v_multiply(cylinder->vec, v_dot(del_p, cylinder->vec))));
-	c = v_len_squared(v_minus(del_p, v_multiply(cylinder->vec, v_dot(del_p, cylinder->vec))))
-				- cylinder->radius * cylinder->radius;
-	discriminant = b * b - a * c;
-	if (discriminant < 0)
+	if (cy->discriminant < 0)
 		return (FALSE);
-	sqrtd = sqrt(discriminant);
-	root = (-b - sqrtd) / a;
-	if (root < rec->t_min || root > rec->t_max)
+	cy->sqrtd = sqrt(cy->discriminant);
+	cy->root = (-cy->b - cy->sqrtd) / cy->a;
+	if (cy->root < rec->t_min || cy->root > rec->t_max)
 		return (FALSE);
-	p = at(root, *r);
-	if (!(len = v_dot(v_minus(p, cylinder->p), cylinder->vec)))
+	cy->p = at(cy->root, *r);
+	if (!(cy->len = v_dot(v_minus(cy->p, cylinder->p), cylinder->vec)))
 		return (FALSE);
-	if (len <= cylinder->len && len > 0)
-		n = v_normalize(v_minus(p, at(len, ray(cylinder->p, cylinder->vec))));
+	if (cy->len <= cylinder->len && cy->len > 0)
+	{
+		cy->n = v_normalize(v_minus(cy->p, at(cy->len, ray(cylinder->p,
+			cylinder->vec))));
+	}
 	else
 	{
 		if (hit_disc(r, obj, rec) == TRUE)
 			return (TRUE);
-		root = (-b + sqrtd) / a;
-		p = at(root, *r);
-		if ((len = v_dot(v_minus(p, cylinder->p), cylinder->vec)) < 0)
-			return (FALSE);
-		if (len <= cylinder->len)
-			n = v_normalize(v_minus(p, at(len, ray(cylinder->p, cylinder->vec))));
-		else
+		if (get_cylinder_far_hitpoint(cy, r, cylinder) == FALSE)
 			return (FALSE);
 	}
-	get_record(rec, root, obj, r);
-	rec->normal = n;
+	return (TRUE);
+}
+
+int					hit_cylinder(t_ray *r, t_objects *obj, t_hit_record *rec)
+{
+	t_cylinder		*cylinder;
+	t_cy_set		cy;
+
+	cylinder = (t_cylinder *)obj->object;
+	cy = get_cylinder_discriminant(cylinder, r);
+	if (get_cylinder_hitpoint(&cy, rec, r, obj) == FALSE)
+		return (FALSE);
+	get_record(rec, cy.root, obj, r);
+	rec->normal = cy.n;
 	set_face_normal(*r, rec);
 	if (is_aligned(cylinder->vec) != FALSE)
-		get_cylinder_uv(rec, cylinder, len);
-	// printf("test\n");
+		get_cylinder_uv(rec, cylinder, cy.len);
 	return (TRUE);
 }

@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.h                                            :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 20:08:37 by hyongti           #+#    #+#             */
-/*   Updated: 2021/01/06 23:00:38 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/01/13 02:41:23 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/01/13 02:46:15 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHT_H
-# define LIGHT_H
+#include "parse.h"
 
-#include "utils.h"
+t_vec	to_vec(char **data)
+{
+	t_vec	result;
 
-t_spot_light		*spot_light(t_point point, double ratio, t_color color);
-t_parallel_light	*parallel_light(t_vec dir, t_color color);
+	result.x = ft_atod(data[0]);
+	result.y = ft_atod(data[1]);
+	result.z = ft_atod(data[2]);
+	return (result);
+}
 
-#endif
+t_color	to_color(char **data)
+{
+	t_vec	result;
+
+	result.x = ft_atod(data[0]) / 255.0;
+	result.y = ft_atod(data[1]) / 255.0;
+	result.z = ft_atod(data[2]) / 255.0;
+	return (result);
+}

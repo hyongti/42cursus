@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:51:44 by root              #+#    #+#             */
-/*   Updated: 2021/01/02 19:11:41 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:12:34 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
+int					ft_isdouble(char *str);
 int					ft_atoi(const char *s);
 double				ft_atod(const char *s);
 

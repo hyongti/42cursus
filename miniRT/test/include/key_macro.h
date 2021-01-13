@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 17:18:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 18:21:46 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 06:08:53 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@
 # define KEY_NUM_2 19
 # define KEY_NUM_3 20
 # define KEY_NUM_4 21
-# define KEY_NUM_5 22
-# define KEY_NUM_6 23
-# define KEY_NUM_7 24
+# define KEY_NUM_5 23
+# define KEY_NUM_6 22
+# define KEY_NUM_7 26
+# define KEY_NUM_8 28
 # define KEY_NUM_9 25
 
 /*
@@ -113,4 +114,4 @@
 # define X_EVENT_MOUSE 4
 # define X_EVENT_KEY_EXIT 17
 
-# endif
+#endif

@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 17:30:37 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 17:09:35 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:37:37 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void		rotate_cylinder(int keycode, t_cntl *cntl)
 		axis_rotate = rotate(vec(0, 0, +10));
 	else
 		return ;
-	((t_cylinder *)cntl->selected->object)->vec
-	= m_mult_v(((t_cylinder *)cntl->selected->object)->vec, 0, axis_rotate);
+	((t_cylinder *)cntl->selected->object)->vec =
+	m_mult_v(((t_cylinder *)cntl->selected->object)->vec, 0, axis_rotate);
 	render_preview(cntl);
 	mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->img->img, 0, 0);
 }
@@ -108,8 +108,8 @@ void		rotate_cone(int keycode, t_cntl *cntl)
 		axis_rotate = rotate(vec(0, 0, +10));
 	else
 		return ;
-	((t_cone *)cntl->selected->object)->axis
-	= m_mult_v(((t_cone *)cntl->selected->object)->axis, 0, axis_rotate);
+	((t_cone *)cntl->selected->object)->axis =
+	m_mult_v(((t_cone *)cntl->selected->object)->axis, 0, axis_rotate);
 	render_preview(cntl);
 	mlx_put_image_to_window(cntl->mlx, cntl->win, cntl->img->img, 0, 0);
 }

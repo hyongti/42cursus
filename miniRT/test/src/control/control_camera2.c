@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 19:21:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/10 19:23:46 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 01:32:40 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	cntl_cam_rotate(int button, t_cntl *cntl)
 
 	cam = cntl->scene->cam_onair;
 	if (button == 1 || button == 7)
-		cam_rotate = rotate(vec(0,5,0));
+		cam_rotate = rotate(vec(0, 5, 0));
 	else if (button == 2 || button == 6)
-		cam_rotate = rotate(vec(0,-5,0));
+		cam_rotate = rotate(vec(0, -5, 0));
 	else if (button == 5)
-		cam_rotate = rotate(vec(+5,0,0));
+		cam_rotate = rotate(vec(+5, 0, 0));
 	else if (button == 4)
-		cam_rotate = rotate(vec(-5,0,0));
+		cam_rotate = rotate(vec(-5, 0, 0));
 	else
 		return ;
 	cam->dir = m_mult_v(cam->dir, 0, cam_rotate);
@@ -49,9 +49,11 @@ void	cntl_camera_translate(int keycode, t_cntl *cntl)
 	else if (keycode == KEY_S)
 		camera->origin = v_plus(camera->origin, v_multiply(camera->dir, -0.1));
 	else if (keycode == KEY_A)
-		camera->origin = v_plus(camera->origin, v_cross(v_multiply(camera->dir, -0.1), camera->vertical));
+		camera->origin = v_plus(camera->origin,
+		v_cross(v_multiply(camera->dir, -0.1), camera->vertical));
 	else if (keycode == KEY_D)
-		camera->origin = v_plus(camera->origin, v_cross(v_multiply(camera->dir, 0.1), camera->vertical));
+		camera->origin = v_plus(camera->origin,
+		v_cross(v_multiply(camera->dir, 0.1), camera->vertical));
 }
 
 void	cntl_camera_hfov(int keycode, t_cntl *cntl)

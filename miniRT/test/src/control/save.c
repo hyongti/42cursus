@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:50:41 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/01/11 21:13:41 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:17:59 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		bmp_save_direct(t_cntl *cntl)
 
 	printf("TYPE FILE NAME(MUST END WITH .bmp)\n");
 	get_next_line(0, &line);
-	fd = open(ft_strjoin("./bmp/", line), O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	fd = open(ft_strjoin("./", line), O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	bmph = bmp_get_header(cntl->scene);
 	write(fd, &bmph, 54);
 	cntl_save(cntl);
