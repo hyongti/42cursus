@@ -1,19 +1,20 @@
 FROM 	alpine:3.12
 
 RUN     apk update
+RUN     apk add grafana --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 RUN     apk add wget
+RUN     wget https://dl.influxdata.com/telegraf/releases/telegraf-1.14.0-static_linux_amd64.tar.gz && \
+        tar -C . -xzf telegraf-1.14.0-static_linux_amd64.tar.gz && \
+        chmod +x telegraf/telegraf && \
+        cp telegraf/telegraf /usr/bin/ && \
+        rm -rf telegraf-1.14.0-static_linux_amd64.tar.gz telegraf/ && \
+        mkdir -p /etc/telegraf
 
-
-RUN     apk add libc6-compat
-RUN     apk add supervisor
-RUN     wget https://dl.grafana.com/oss/release/grafana-7.1.5.linux-amd64.tar.gz
-RUN     tar -zxvf grafana-7.1.5.linux-amd64.tar.gz
-RUN     mkdir -p /etc/telegraf
-
-COPY    /srcs/telegraf.conf /etc/telegraf/
-COPY    /srcs/run.sh        .
-COPY    /srcs/grafana.db   /grafana-7.1.5/data/grafana.db
-
-CMD     sh run.sh
+COPY    srcs/provisioning/datasources/influxdb.yml /usr/share/grafana/conf/provisioning/datasources/
+COPY    srcs/telegraf.conf /etc/telegraf
+COPY    srcs/run.sh .
 
 EXPOSE  3000
+
+CMD     ["sh", "run.sh"]
+

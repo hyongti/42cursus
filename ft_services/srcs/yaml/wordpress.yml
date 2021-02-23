@@ -13,8 +13,8 @@ spec:
   ports:
     - port: 5050
       nodePort: 5050
----
 
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
