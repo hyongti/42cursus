@@ -4,10 +4,10 @@
 # /usr/bin/mysql_install_db
 # /etc/init.d/mariadb setup
 # /etc/init.d/mariadb start 를 경로를 알아서 찾아서 실행해주는 명령어가 rc-service인가 보다.
-openrc 
+openrc
 # rc-service 명령을 실행하기 위해 openrc를 설치하고 실행해줘야 함
 touch /run/openrc/softlevel
-# 위 명령을 실행해 줘야 rc-service mariacb " "가 실행이 된다.
+# 위 명령을 실행해 줘야 rc-service mariadb " "가 실행이 된다.
 /usr/bin/mysql_install_db
 
 # rc-service mariadb setup
