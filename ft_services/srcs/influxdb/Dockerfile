@@ -10,7 +10,8 @@ RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.14.0-static_linu
     mkdir -p /etc/telegraf
 
 COPY    /srcs/telegraf.conf /etc/telegraf/
+COPY    /srcs/run.sh /
 
 EXPOSE 8086
 
-ENTRYPOINT ["/usr/sbin/influxd"]
+CMD ["sh", "run.sh"]

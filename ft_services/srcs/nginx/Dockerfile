@@ -23,11 +23,10 @@ RUN chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key
 COPY /srcs/nginx.conf /etc/nginx/nginx.conf
 COPY /srcs/index.html /www/index.html
 COPY /srcs/telegraf.conf /etc/telegraf
-
-ENTRYPOINT ["nginx"]
+COPY /srcs/run.sh /
 
 EXPOSE 80 443
 
-CMD ["-g", "daemon off;"]
+CMD ["sh", "run.sh"]
 
 # CMD sh setting.sh
