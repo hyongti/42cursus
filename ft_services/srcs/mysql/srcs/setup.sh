@@ -27,6 +27,4 @@ echo "FLUSH PRIVILEGES;" | mysql -u root
 
 mysql -u root wordpress < wordpress.sql
 # mariadb daemon 실행
-/usr/bin/mysqld_safe --datadir=/var/lib/mysql
-
-telegraf &
+telegraf & /usr/bin/mysqld_safe --datadir=/var/lib/mysql

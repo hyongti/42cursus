@@ -1,7 +1,7 @@
 BLUE_GREEN="\033[36m"
 echo -n "${BLUE_GREEN}"
 
-export MINIKUBE_HOME=~/goinfre # @개포동(저장공간 확보!)
+# export MINIKUBE_HOME=~/goinfre # @개포동(저장공간 확보!)
 
 minikube delete --all
 
@@ -31,7 +31,7 @@ docker build -t influxdb_service ./srcs/influxdb > /dev/null
 echo "grafana..."
 docker build -t grafana_service ./srcs/grafana > /dev/null
 echo "ftps..."
-docker build -t grafana_service ./srcs/grafana > /dev/null
+docker build -t ftps_service ./srcs/grafana > /dev/null
 
 # 오브젝트 생성
 echo "오브젝트를 생성합니다..."
