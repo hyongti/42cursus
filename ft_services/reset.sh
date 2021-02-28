@@ -1,6 +1,6 @@
-kubectl delete -f ./srcs/yaml/grafana.yml
+kubectl delete -f ./srcs/yaml/ftps.yml
 eval $(minikube docker-env)
-docker rmi grafana_service
+docker rmi ftps_service
 
-docker build ./srcs/grafana/ -t grafana_service
-kubectl apply -f ./srcs/yaml/grafana.yml
+docker build ./srcs/ftps/ -t ftps_service
+kubectl apply -f ./srcs/yaml/ftps.yml

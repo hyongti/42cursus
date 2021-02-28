@@ -12,8 +12,8 @@ spec:
   type: LoadBalancer
   ports:
     - port: 20
-      targetPort: 20 # link to pod's container's port
       name: ftp-data
+      targetPort: 20
       protocol: TCP
     - port: 21
       name: ftp
