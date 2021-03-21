@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   init_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 17:17:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 15:20:11 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/21 17:55:37 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/21 17:56:01 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+void	init_stacks(t_list **stack_a, t_list **stack_b, char *argv[])
 {
-	t_list	*ret;
+	int		i;
+	int		*argv_int;
 
-	if (!(ret = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ret->next = NULL;
-	ret->content = content;
-	return (ret);
+	i = 0;
+	*stack_a = NULL;
+	*stack_b = NULL;
+	while (argv[++i])
+	{
+		argv_int = (int *)malloc(sizeof(int));
+		*argv_int = ft_atoi(argv[i]);
+		ft_lstadd_back(stack_a, ft_lstnew(argv_int));
+	}
 }

@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 17:17:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 15:20:11 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/21 17:24:39 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+void	swap(t_list **stack)
 {
-	t_list	*ret;
+	int		*tmp;
 
-	if (!(ret = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ret->next = NULL;
-	ret->content = content;
-	return (ret);
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		tmp = (*stack)->content;
+		(*stack)->content = ((*stack)->next)->content;
+		((*stack)->next)->content = tmp;
+	}
+	else
+		printf("not enough numbers\n");
 }

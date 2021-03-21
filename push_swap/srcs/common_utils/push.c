@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 17:17:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 15:20:11 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/21 17:24:23 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+void	push(t_list **stack1, t_list **stack2)
 {
-	t_list	*ret;
+	t_list	*tmp;
 
-	if (!(ret = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ret->next = NULL;
-	ret->content = content;
-	return (ret);
+	tmp = *stack1;
+	if (*stack1 == NULL)
+		printf("stack is empty\n");
+	else
+	{
+		*stack1 = (*stack1)->next;
+		ft_lstadd_front(stack2, tmp);
+	}
 }

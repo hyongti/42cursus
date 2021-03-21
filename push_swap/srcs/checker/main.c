@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 20:47:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/18 22:02:40 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:13:55 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,67 @@
 
 int		main(int argc, char *argv[])
 {
-	t_stacks	*stack_a;
-	t_stacks	*stack_b;
+	t_list	*stack_a;
+	t_list	*stack_b;
 
 	if (argc > 1)
 	{
-		init_stacks(stack_a, stack_b, argv);
-		print_stacks(stack_a, stack_b);
+		if (has_valid_argument(argv) == TRUE)
+		{
+			init_stacks(&stack_a, &stack_b, argv);
+			// test_init_stacks(stack_a, stack_b);
+			wait_instruction_and_sort(&stack_a, &stack_b);
+			check_stacks_sorted(stack_a, stack_b);
+		}
+		else
+			write(2, "Error\n", 6);
 	}
 	else
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 }
 
-void	init_stacks(t_list *stack_a, t_list *stack_b, char *argv[])
+void	wait_instruction_and_sort(t_list **stack_a, t_list **stack_b)
 {
-	int	i;
+	char	*line;
+	int		gnl_return;
 
-	i = 0;
-	stack_a = NULL;
-	stack_b = NULL;
-	while (argv[++i])
+	while ((gnl_return = get_next_line(0, &line)) > 0)
 	{
-		
-		ft_lstadd_back(&stack_a, ft_lstnew())
+		if (ft_strncmp(line, "pb", 2) == 0)
+			push(stack_a, stack_b);
+		else if (ft_strncmp(line, "pa", 2) == 0)
+			push(stack_b, stack_a);
+		else if (ft_strncmp(line, "sa", 2) == 0)
+			swap(stack_a);
+		else if (ft_strncmp(line, "sb", 2) == 0)
+			swap(stack_b);
+		else if (ft_strncmp(line, "ra", 2) == 0)
+			rotate(stack_a);
+		else if (ft_strncmp(line, "rb", 2) == 0)
+			rotate(stack_b);
+		free(line);
+		// test_init_stacks(*stack_a, *stack_b);
 	}
 }
 
-void	print_stacks(t_list *stack_a, t_list *stack_b)
+void	check_stacks_sorted(t_list *stack_a, t_list *stack_b)
 {
-	
+	if (stack_b != NULL)
+	{
+		write(1, "KO\n", 3);
+		return ;
+	}
+	while (stack_a != NULL && stack_a->next != NULL)
+	{
+		if (*(int *)(stack_a->content)
+			< (*(int *)(stack_a->next->content)))
+			stack_a = stack_a->next;
+		else
+		{
+			write(1, "KO\n", 3);
+			return ;
+		}
+	}
+	write(1, "OK\n", 3);
+	return ;
 }

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 17:17:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 15:20:11 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/21 18:11:12 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+void	rotate(t_list **stack)
 {
-	t_list	*ret;
+	t_list	*tmp;
 
-	if (!(ret = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ret->next = NULL;
-	ret->content = content;
-	return (ret);
+	if (*stack != NULL && ft_lstlast(*stack) != NULL)
+	{
+		// tmp = (*stack)->content;
+		// (*stack)->content = ft_lstlast(*stack)->content;
+		// ft_lstlast(*stack)->content = tmp;
+		tmp = *stack;
+		*stack = (*stack)->next;
+		ft_lstadd_back(stack, tmp);
+		tmp->next = NULL;
+	}
+	else
+		printf("not enough numbers\n");
 }

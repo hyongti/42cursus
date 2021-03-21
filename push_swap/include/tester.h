@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   tester.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 17:17:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 15:20:11 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/21 15:48:12 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/21 15:49:04 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef TESTER_H
+# define TESTER_H
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*ret;
+# include "../libft/libft.h"
 
-	if (!(ret = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ret->next = NULL;
-	ret->content = content;
-	return (ret);
-}
+void	test_init_stacks(t_list *stack_a, t_list *stack_b);
+
+#endif

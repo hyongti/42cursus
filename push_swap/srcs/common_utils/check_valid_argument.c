@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   check_valid_argument.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 17:17:43 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 15:20:11 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/19 17:38:42 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/21 16:01:11 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+t_bool	has_valid_argument(char *argv[])
 {
-	t_list	*ret;
+	int		i;
 
-	if (!(ret = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ret->next = NULL;
-	ret->content = content;
-	return (ret);
+	i = 0;
+	while (argv[++i])
+	{
+		if (has_only_digit(argv[i]) == FALSE)
+			return (FALSE);
+	}
+	return (TRUE);
+}
+
+t_bool	has_only_digit(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (str[i] == '-')
+		++i;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) == FALSE)
+			return (FALSE);
+		++i;
+	}
+	return (TRUE);
 }
