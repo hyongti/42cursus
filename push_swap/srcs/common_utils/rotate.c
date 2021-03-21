@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 18:11:12 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:26:19 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ void	rotate(t_list **stack)
 
 	if (*stack != NULL && ft_lstlast(*stack) != NULL)
 	{
-		// tmp = (*stack)->content;
-		// (*stack)->content = ft_lstlast(*stack)->content;
-		// ft_lstlast(*stack)->content = tmp;
 		tmp = *stack;
 		*stack = (*stack)->next;
 		ft_lstadd_back(stack, tmp);

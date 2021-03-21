@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 20:47:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 18:13:55 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:30:36 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void	wait_instruction_and_sort(t_list **stack_a, t_list **stack_b)
 			rotate(stack_a);
 		else if (ft_strncmp(line, "rb", 2) == 0)
 			rotate(stack_b);
+		// if (line[0] == 'p')
+		// 	go_to_push(stack_a, stack_b, line + 1);
+		// else if (line[0] == 's')
+		// 	go_to_swap(stack_a, stack_b, line + 1);
+		// else if (line[0] == 'r')
+		// 	go_to_rotate(stack_a, stack_b, line + 1);
+		// else
 		free(line);
 		// test_init_stacks(*stack_a, *stack_b);
 	}
