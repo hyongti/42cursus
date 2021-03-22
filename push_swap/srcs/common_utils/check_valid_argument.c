@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_valid_argument.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 17:38:42 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 16:01:11 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:26:58 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_bool	has_valid_argument(char *argv[])
 	{
 		if (has_only_digit(argv[i]) == FALSE)
 			return (FALSE);
+		// if (is_in_int_range(argv[i]) == FALSE)
+		// 	return (FALSE);
 	}
 	return (TRUE);
 }
@@ -40,3 +42,11 @@ t_bool	has_only_digit(char *str)
 	}
 	return (TRUE);
 }
+
+// t_bool	is_in_int_range(char *str)
+// {
+// 	if (ft_atoi(str) > 2147483647 || ft_atoi(str) < -2147483648)
+// 		return (FALSE);
+// 	else
+// 		return (TRUE);
+// }

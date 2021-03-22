@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 20:47:23 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/21 18:30:36 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/22 21:24:43 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		main(int argc, char *argv[])
 		if (has_valid_argument(argv) == TRUE)
 		{
 			init_stacks(&stack_a, &stack_b, argv);
-			// test_init_stacks(stack_a, stack_b);
 			wait_instruction_and_sort(&stack_a, &stack_b);
 			check_stacks_sorted(stack_a, stack_b);
 		}
@@ -37,30 +36,24 @@ void	wait_instruction_and_sort(t_list **stack_a, t_list **stack_b)
 {
 	char	*line;
 	int		gnl_return;
-
+	int		count = 0;
+	
 	while ((gnl_return = get_next_line(0, &line)) > 0)
 	{
-		if (ft_strncmp(line, "pb", 2) == 0)
-			push(stack_a, stack_b);
-		else if (ft_strncmp(line, "pa", 2) == 0)
-			push(stack_b, stack_a);
-		else if (ft_strncmp(line, "sa", 2) == 0)
-			swap(stack_a);
-		else if (ft_strncmp(line, "sb", 2) == 0)
-			swap(stack_b);
-		else if (ft_strncmp(line, "ra", 2) == 0)
-			rotate(stack_a);
-		else if (ft_strncmp(line, "rb", 2) == 0)
-			rotate(stack_b);
-		// if (line[0] == 'p')
-		// 	go_to_push(stack_a, stack_b, line + 1);
-		// else if (line[0] == 's')
-		// 	go_to_swap(stack_a, stack_b, line + 1);
-		// else if (line[0] == 'r')
-		// 	go_to_rotate(stack_a, stack_b, line + 1);
-		// else
+		if (line[0] == 'p')
+			push(stack_a, stack_b, line + 1);
+		else if (line[0] == 's')
+			swap(stack_a, stack_b, line + 1);
+		else if (line[0] == 'r' && ft_strlen(line) == 2)
+			rotate(stack_a, stack_b, line + 1);
+		else if (line[0] == 'r' && ft_strlen(line) == 3)
+			reverse_rotate(stack_a, stack_b, line + 1);
+		else
+			write(2, "WRONG COMMAND\n", 14);
 		free(line);
-		// test_init_stacks(*stack_a, *stack_b);
+		line = NULL;
+		write(1, "\n", 1);
+		print_stacks(*stack_a, *stack_b);
 	}
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/18 20:49:19 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/03/21 17:58:36 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/03/22 16:31:34 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS_COMMON_UTILS_NAME = check_valid_argument.c \
 							push.c \
 							swap.c \
 							rotate.c \
+							rotate_reverse.c \
 							tester.c
 SRCS_COMMON_UTILS_DIR = ./srcs/common_utils/
 

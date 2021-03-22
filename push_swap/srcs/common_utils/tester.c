@@ -1,23 +1,29 @@
 #include "tester.h"
 
-void	test_init_stacks(t_list *stack_a, t_list *stack_b)
+void	print_stacks(t_list *stack_a, t_list *stack_b)
 {
-	while (stack_a != NULL || stack_b != NULL)
+	t_list	*tmp_a;
+	t_list	*tmp_b;
+
+	tmp_a = stack_a;
+	tmp_b = stack_b;
+	while (tmp_a != NULL || tmp_b != NULL)
 	{
-		if (stack_a != NULL)
+		if (tmp_a != NULL)
 		{
-			printf("%10d |", *(int *)(stack_a->content));
-			stack_a = stack_a->next;
+			printf("%10d |", *(int *)(tmp_a->content));
+			tmp_a = tmp_a->next;
 		}
 		else
 			printf("           |");
-		if (stack_b != NULL)
+		if (tmp_b != NULL)
 		{
-			printf("%10d", *(int *)(stack_b->content));
-			stack_b = stack_b->next;
+			printf("%10d", *(int *)(tmp_b->content));
+			tmp_b = tmp_b->next;
 		}
 		else
 			printf("           ");
 		printf("\n");
 	}
+	printf("-----a-----|-----b-----\n\n");
 }

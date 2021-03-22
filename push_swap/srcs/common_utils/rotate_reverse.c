@@ -1,43 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/22 18:17:56 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/22 11:24:10 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/22 11:51:01 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(t_list **stack_a, t_list **stack_b, char *line)
+void	reverse_rotate(t_list **a, t_list **b, char *line)
 {
-	if (line[0] == 'r')
+	if (line[0] == 'r' && line[1] == 'r')
 	{
-		rotate_stack(stack_a);
-		rotate_stack(stack_b);
+		reverse_rotate_stack(a);
+		reverse_rotate_stack(b);
 	}
-	else if (line[0] == 'a')
-		rotate_stack(stack_a);
-	else if (line[0] == 'b')
-		rotate_stack(stack_b);
+	else if (line[0] == 'r' && line[1] == 'a')
+		reverse_rotate_stack(a);
+	else if (line[0] == 'r' && line[1] == 'b')
+		reverse_rotate_stack(b);
 	else
 		write(1, "Wrong Command\n", 14);
 }
 
-void	rotate_stack(t_list **stack)
+void	reverse_rotate_stack(t_list **stack)
 {
 	t_list	*tmp;
+	t_list	*tmp2;
 
 	if (*stack != NULL && ft_lstlast(*stack) != NULL)
 	{
+		ft_lstadd_front(stack, ft_lstnew(ft_lstlast(*stack)->content));
 		tmp = *stack;
-		ft_lstadd_back(stack, ft_lstnew((*stack)->content));
-		*stack = (*stack)->next;
+		tmp2 = ft_lstlast(*stack);
+		while (tmp->next != tmp2)
+			tmp = tmp->next;
+		free(tmp2);
 		tmp->next = NULL;
-		// free(tmp);
 	}
 	else
 		printf("not enough numbers\n");
