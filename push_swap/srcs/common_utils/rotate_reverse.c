@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*   rotate_reverse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:24:10 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/22 11:51:01 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/23 19:30:31 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	rra(t_list **stack_a)
+{
+	write(1, "rra\n", 4);
+	reverse_rotate_stack(stack_a);
+}
+
+void	rrb(t_list **stack_b)
+{
+	write(1, "rrb\n", 4);
+	reverse_rotate_stack(stack_b);
+}
 
 void	reverse_rotate(t_list **a, t_list **b, char *line)
 {

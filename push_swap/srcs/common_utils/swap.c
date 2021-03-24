@@ -6,11 +6,23 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:29 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/23 19:31:45 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sa(t_list **stack_a)
+{
+	write(1, "sa\n", 3);
+	swap_stack(stack_a);
+}
+
+void	sb(t_list **stack_b)
+{
+	write(1, "sb\n", 3);
+	swap_stack(stack_b);
+}
 
 void	swap(t_list **stack_a, t_list **stack_b, char *line)
 {

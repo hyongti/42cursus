@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:51:44 by root              #+#    #+#             */
-/*   Updated: 2021/01/13 15:12:34 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/24 13:15:21 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int					ft_isascii(int c);
 int					ft_isdouble(char *str);
 int					ft_atoi(const char *s);
 double				ft_atod(const char *s);
+long long			ft_atoll(const char *s);
 
 char				*ft_substr(char const *s, const unsigned int start,
 																size_t n);

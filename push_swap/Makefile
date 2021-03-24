@@ -6,7 +6,7 @@
 #    By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/18 20:49:19 by hyeonkim          #+#    #+#              #
-#    Updated: 2021/03/22 16:31:34 by hyeonkim         ###   ########.fr        #
+#    Updated: 2021/03/24 15:00:12 by hyeonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,24 +14,26 @@ CHECKER = checker
 PUSH_SWAP = push_swap
 
 CC = gcc
-CFLAGS =  -fsanitize=address #-Wall -Wextra -Werror 
+CFLAGS =   -fsanitize=address #-Wall -Wextra -Werror 
 INCLUDE = -I./include
 LIBDIR = ./libft
 LIBFT = libft.a
 
-SRCS_PUSH_SWAP_NAME = main.c
+SRCS_PUSH_SWAP_NAME = main.c version3.c #version1.c
 PUSH_SWAP_DIR = ./srcs/push_swap/
 
 SRCS_CHECKER_NAME = main.c
 CHECKER_DIR = ./srcs/checker/
 
 SRCS_COMMON_UTILS_NAME = check_valid_argument.c \
+							check_sorted.c \
 							init_stacks.c \
 							push.c \
 							swap.c \
 							rotate.c \
 							rotate_reverse.c \
-							tester.c
+							find_value.c \
+							sort_three_in_ascending_order.c tester.c
 SRCS_COMMON_UTILS_DIR = ./srcs/common_utils/
 
 SRCS_PUSH_SWAP = $(addprefix $(PUSH_SWAP_DIR), $(SRCS_PUSH_SWAP_NAME))

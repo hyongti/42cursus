@@ -26,4 +26,6 @@ void	print_stacks(t_list *stack_a, t_list *stack_b)
 		printf("\n");
 	}
 	printf("-----a-----|-----b-----\n\n");
+	// sleep(1);
+	usleep (50000);
 }

@@ -6,11 +6,23 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/22 12:44:06 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/23 20:27:17 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	pa(t_list **stack_b, t_list **stack_a)
+{
+	write(1, "pa\n", 3);
+	push_stack1_to_stack2(stack_b, stack_a);
+}
+
+void	pb(t_list **stack_a, t_list **stack_b)
+{
+	write(1, "pb\n", 3);
+	push_stack1_to_stack2(stack_a, stack_b);
+}
 
 void	push(t_list **stack_a, t_list **stack_b, char *line)
 {

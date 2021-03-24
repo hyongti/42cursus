@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 13:50:45 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/22 11:57:27 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/23 14:34:28 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int				get_next_line(int fd, char **line)
 	while ((readsize = read(fd, buf, BUFFER_SIZE)) >= 0)
 	{
 		tmp = join_buf(&store[fd], buf, readsize);
+		free(store[fd]);
 		store[fd] = tmp;
 		if (ft_strchr(store[fd], '\n') || readsize == 0)
 			break ;

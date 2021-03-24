@@ -6,11 +6,23 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 17:23:38 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/22 18:17:56 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/03/23 19:31:07 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ra(t_list **stack_a)
+{
+	write(1, "ra\n", 3);
+	rotate_stack(stack_a);
+}
+
+void	rb(t_list **stack_b)
+{
+	write(1, "rb\n", 3);
+	rotate_stack(stack_b);
+}
 
 void	rotate(t_list **stack_a, t_list **stack_b, char *line)
 {

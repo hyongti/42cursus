@@ -1,53 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_valid_argument.c                             :+:      :+:    :+:   */
+/*   check_sorted.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 17:38:42 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/24 13:27:43 by hyeonkim         ###   ########.fr       */
+/*   Created: 2021/03/23 19:09:12 by hyeonkim          #+#    #+#             */
+/*   Updated: 2021/03/23 19:09:21 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_bool	has_valid_argument(int argc, char *argv[])
+t_bool	check_sorted_in_ascending_order(t_list *stack)
 {
-	int		i;
-
-	i = 0;
-	while (argv[++i])
+	while (stack != NULL && stack->next != NULL)
 	{
-		if (has_only_digit(argv[i]) == FALSE)
-			return (FALSE);
-		if (is_in_int_range(argv[i]) == FALSE)
+		if (*(int *)(stack->content)
+			< (*(int *)(stack->next->content)))
+			stack = stack->next;
+		else
 			return (FALSE);
 	}
 	return (TRUE);
 }
 
-t_bool	has_only_digit(char *str)
+t_bool	check_sorted_in_descending_order(t_list *stack)
 {
-	int		i;
-
-	i = 0;
-	if (str[i] == '-')
-		++i;
-	while (str[i])
+	while (stack != NULL && stack->next != NULL)
 	{
-		if (ft_isdigit(str[i]) == FALSE)
+		if (*(int *)(stack->content)
+			> (*(int *)(stack->next->content)))
+			stack = stack->next;
+		else
 			return (FALSE);
-		++i;
 	}
 	return (TRUE);
 }
-
-t_bool	is_in_int_range(char *str)
-{
-	if (ft_atoll(str) > 2147483647 || ft_atoll(str) < -2147483648)
-		return (FALSE);
-	else
-		return (TRUE);
-}
-
