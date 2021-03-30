@@ -12,16 +12,16 @@ compare:
 	mov		al, BYTE [rdi]
 	mov		bl, BYTE [rsi]
 	cmp		al, 0			; 널을 발견하면 비교 중지
-	je		exit			; jump to exit_end
+	je		return			; jump to return
 	cmp		bl, 0			; 널을 발견하면 비교 중지
-	je		exit			; jump to exit
+	je		return			; jump to return
 	cmp 	al, bl			; compare al and bl
-	jne 	exit			; jne 두 값이 다르면 리턴으로 이동
+	jne 	return			; jne 두 값이 다르면 리턴으로 이동
 	inc 	rdi				; increment the rdi pointer
 	inc 	rsi				; increment the rsi pointer
 	jmp 	compare			; 반복
 
-exit:
+return:
 	movzx	rax, al			; rax 에 s1의 마지막 확인 문자열을 기록
 	push	rbx				; movzx 여분의 자리를 0비트로 채움 24(0) + al(8)
 	movzx	rbx, bl			; rbx 에 s2의 마지막 확인 문자열을 기록

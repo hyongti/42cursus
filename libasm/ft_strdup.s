@@ -1,4 +1,4 @@
-segment .text
+section .text
 	global _ft_strdup
 	; char	*ft_strdup(const char *s1 == rdi);
 	extern _ft_strlen
