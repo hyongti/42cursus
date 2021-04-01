@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:14:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/01 20:34:07 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/01 21:06:07 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void		init_fork(t_table *table, t_philosopher **philo)
 	{
 		pthread_mutex_init(&table->fork[i], NULL);
 		(*philo)[i].number = i + 1;
-		(*philo)[i].right_fork = i + 1;
+		(*philo)[i].right_fork = i;
 		if (i - 1 >= 0)
-			(*philo)[i].left_fork = i;
+			(*philo)[i].left_fork = i - 1;
 		else
-			(*philo)[i].left_fork = num;
+			(*philo)[i].left_fork = num - 1;
 	}
 	table->starting_time = get_time();
 }
