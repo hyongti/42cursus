@@ -1,11 +1,12 @@
 NAME = philo_one
 CC = gcc
-CLFAGS = -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address #-Wall -Wextra -Werror
 INCLUDE = -I./include
 
 SRCS_NAME = main.c \
 		parse.c \
-		utils/ft_atoi.c
+		utils/ft_atoi.c \
+		utils/get_time.c
 SRCS_DIR = ./srcs/
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NAME))
 OBJS = $(SRCS:.c=.o)
@@ -21,7 +22,7 @@ $(NAME) : $(OBJS)
 clean :
 	rm -f $(OBJS)
 
-flcean : clean
+fclean : clean
 	rm -f $(NAME)
 
 re : fclean all

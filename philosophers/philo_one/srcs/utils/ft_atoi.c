@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:29:22 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/03/31 18:29:41 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/01 11:17:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		check_over_range(int count, int sign, int result)
 		return (result);
 }
 
-int				ft_atoi(const char *s)
+int				ft_atoi(char *s)
 {
 		int			idx;
 		int			sign;

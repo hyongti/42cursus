@@ -38,7 +38,7 @@ void *t_function(void *philosopher)
 
 	pthread_mutex_unlock(((t_philosopher *)philosopher)->fork);
 }
- 
+
 int main()
 {
 	pthread_t		p_thread[2];
