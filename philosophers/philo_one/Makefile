@@ -6,6 +6,7 @@ INCLUDE = -I./include
 SRCS_NAME = main.c \
 		parse.c \
 		init.c \
+		simulation.c \
 		utils/ft_atoi.c \
 		utils/get_time.c
 SRCS_DIR = ./srcs/

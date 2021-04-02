@@ -6,11 +6,17 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:14:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/01 21:06:07 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:17:51 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+void		prepare_for_simulation(t_table *table, t_philosopher **philos)
+{
+	init_philosophers(table, philos);
+	init_table(table, philos);
+}
 
 void		init_philosophers(t_table *table, t_philosopher **philos)
 {
@@ -23,11 +29,13 @@ void		init_philosophers(t_table *table, t_philosopher **philos)
 	while (++i < num)
 	{
 		(*philos)[i].eating_count = 0;
+		(*philos)[i].time_of_recent_meal = 0;
 		(*philos)[i].table = table;
+		(*philos)[i].action = 0;
 	}
 }
 
-void		init_fork(t_table *table, t_philosopher **philo)
+void		init_table(t_table *table, t_philosopher **philo)
 {
 	int				i;
 	int				num;
@@ -46,10 +54,7 @@ void		init_fork(t_table *table, t_philosopher **philo)
 			(*philo)[i].left_fork = num - 1;
 	}
 	table->starting_time = get_time();
-}
-
-void		set_table(t_table *table, t_philosopher **philos)
-{
-	init_philosophers(table, philos);
-	init_fork(table, philos);
+	table->count_eat_all = 0;
+	table->check_anyone_dead = 0;
+	pthread_mutex_init(&table->not_twisted_msg, NULL);
 }
