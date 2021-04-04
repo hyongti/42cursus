@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 16:20:50 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/02 18:13:39 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/04 17:47:57 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_ONE_H
 # define PHILO_ONE_H
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/time.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/time.h>
 
 # define TRUE 1
 # define FALSE 0
 
-# define ALIVE 2
-# define DEAD 3
+# define NO_ONE_DIED 2
+# define SOMEONE_DIED 3
 
 # define EATING 4
 # define SLEEPING 5
 # define THINKING 6
+# define DEAD 7
 
 typedef struct		s_table
 {
@@ -55,22 +56,26 @@ typedef struct		s_philosopher
 	pthread_t		tid;
 }					t_philosopher;
 
+int					ft_atoi(char *s);
+int					get_time(void);
+void				usleep_more_precisely(int sleeptime);
 
-int				ft_atoi(char *s);
-int				get_time(void);
+int					is_valid_argument(int argc, char *argv[]);
+void				parse_argument(t_table *table, int argc, char *argv[]);
+int					print_error(char *str);
 
-int				is_valid_argument(int argc, char *argv[]);
-void			parse_argument(t_table *table ,int argc, char *argv[]);
+void				prepare_for_simulation(t_table *table,
+											t_philosopher **philos);
+void				init_philosophers(t_table *table, t_philosopher **philos);
+void				init_table(t_table *table, t_philosopher **philo);
 
-void			prepare_for_simulation(t_table *table, t_philosopher **philos);
-void			init_philosophers(t_table *table, t_philosopher **philos);
-void			init_table(t_table *table, t_philosopher **philo);
-
-void			start_simulation(t_table *table, t_philosopher *philosopher);
-void			*simulate(void *philosopher);
-int				eating(t_philosopher *philo);
-void			sleeping(t_philosopher *philo);
-void			thinking(t_philosopher *philo);
-void			print_message(t_philosopher *philo, int time);
+void				start_simulation(t_table *table,
+										t_philosopher *philosopher);
+void				*simulation(void *philosopher);
+void				*check_anyone_dead(void *philo);
+int					eating(t_philosopher *philo);
+int					sleeping(t_philosopher *philo);
+int					thinking(t_philosopher *philo);
+void				print_message(t_philosopher *philo, int time);
 
 #endif
