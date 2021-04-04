@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 16:39:11 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/04 17:50:35 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 07:42:37 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ void			*simulation(void *philosopher)
 	pthread_t		is_someone_dead;
 
 	philo = (t_philosopher *)philosopher;
+	if (philo->number % 2 == 0)
+		usleep(philo->table->time_to_sleep * 1000);
 	must_eat_count = philo->table->number_of_times_each_philosopher_must_eat;
 	pthread_create(&is_someone_dead, NULL, &check_anyone_dead, philo);
 	while (1)
 	{
-		if (philo->table->count_eat_all == philo->table->num_of_philosophers)
+		if (philo->eating_count == must_eat_count)
 			break ;
 		if (eating(philo) == SOMEONE_DIED)
 			break ;
