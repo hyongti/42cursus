@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 16:20:50 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/04 17:47:57 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/04 18:04:55 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,8 @@ int					eating(t_philosopher *philo);
 int					sleeping(t_philosopher *philo);
 int					thinking(t_philosopher *philo);
 void				print_message(t_philosopher *philo, int time);
+
+void				clean_after_simulation(t_table *table,
+												t_philosopher *philo);
 
 #endif

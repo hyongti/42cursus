@@ -1,15 +1,16 @@
 NAME = philo_one
 CC = gcc
-CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
+CFLAGS = #-g3 -fsanitize=address #-Wall -Wextra -Werror
 INCLUDE = -I./include
 
-SRCS_NAME = 1_main.c \
-		2_is_valid_argument.c \
-		3_parse_argument.c \
-		4_prepare_for_simulation.c \
-		5_start_simulation.c \
-		6_simulation.c \
-		7_print_message.c \
+SRCS_NAME = main.c \
+		is_valid_argument.c \
+		parse_argument.c \
+		prepare_for_simulation.c \
+		start_simulation.c \
+		simulation.c \
+		print_message.c \
+		clean.c \
 		utils/ft_atoi.c \
 		utils/get_time.c
 SRCS_DIR = ./srcs/
