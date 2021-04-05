@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:14:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/05 09:48:10 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:31:05 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		init_table(t_table *table, t_philosopher **philo)
 	num = table->num_of_philosophers;
 	sem_unlink("/file");
 	sem_unlink("/clean_msg");
-	table->fork = sem_open("/file",O_CREAT | O_EXCL, 
+	table->fork = sem_open("/file", O_CREAT | O_EXCL,
 						0777, table->num_of_philosophers);
 	table->for_not_twisted_msg = sem_open("/clean_msg", O_CREAT | O_EXCL,
 						0777, 1);

@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:56:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/05 09:58:40 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:30:46 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ void			*simulation(void *philosopher)
 
 	philo = (t_philosopher *)philosopher;
 	must_eat_count = philo->table->number_of_times_each_philosopher_must_eat;
+	if (philo->number % 2 == 0)
+		usleep(philo->table->time_to_sleep * 1000);
 	pthread_create(&is_someone_dead, NULL, &check_anyone_dead, philo);
 	while (1)
 	{
-		if (philo->eating_count == must_eat_count)
-			break ;
 		if (taking_fork(philo) == SOMEONE_DIED)
 			break ;
 		if (eating(philo) == SOMEONE_DIED)
+			break ;
+		if (philo->eating_count == must_eat_count)
 			break ;
 		if (sleeping(philo) == SOMEONE_DIED)
 			break ;

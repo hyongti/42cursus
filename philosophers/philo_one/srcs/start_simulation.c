@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:56:21 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/05 10:00:35 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:31:39 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void			*simulation(void *philosopher)
 	pthread_create(&is_someone_dead, NULL, &check_anyone_dead, philo);
 	while (1)
 	{
-		if (philo->eating_count == must_eat_count)
-			break ;
 		if (taking_fork(philo) == SOMEONE_DIED)
 			break ;
 		if (eating(philo) == SOMEONE_DIED)
+			break ;
+		if (philo->eating_count == must_eat_count)
 			break ;
 		if (sleeping(philo) == SOMEONE_DIED)
 			break ;

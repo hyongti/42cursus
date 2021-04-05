@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 16:39:11 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/05 10:03:51 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 11:33:30 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void			*check_anyone_dead(void *philosopher)
 	while (1)
 	{
 		time = get_time() - philo->table->starting_time;
+		if (must_eat_count != -1 && philo->eating_count >= must_eat_count)
+			break ;
 		if (time - philo->time_of_recent_meal > philo->table->time_to_die)
 		{
 			philo->action = DEAD;
 			print_message(philo, time);
-			philo->table->check_anyone_dead = TRUE;
+			philo->table->check_anyone_dead = 1;
 			break ;
 		}
 	}
@@ -60,7 +62,7 @@ int				eating(t_philosopher *philo)
 	print_message(philo, philo->time_of_recent_meal);
 	usleep(philo->table->time_to_eat * 1000);
 	++philo->eating_count;
-	if (philo->eating_count == must_eat_count)
+	if (philo->eating_count >= must_eat_count)
 		++philo->table->count_eat_all;
 	pthread_mutex_unlock(&philo->table->fork[philo->left_fork]);
 	pthread_mutex_unlock(&philo->table->fork[philo->right_fork]);

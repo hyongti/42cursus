@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 16:34:47 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/05 09:57:48 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:28:52 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			print_message(t_philosopher *philo, int time)
 		else if (philo->action == EATING)
 		{
 			printf("%d %d has taken a fork\n", time, philo->number);
-			printf("%d %d is eating %d times\n",
+			printf("%d %d is eating (%d times)\n",
 					time, philo->number, philo->eating_count + 1);
 		}
 		else if (philo->action == SLEEPING)
