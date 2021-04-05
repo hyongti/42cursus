@@ -1,6 +1,6 @@
-NAME = philo_two
+NAME = philo_three
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
 INCLUDE = -I./include
 
 SRCS_NAME = main.c \
