@@ -8,6 +8,7 @@ SRCS_NAME = main.c \
 		parse_argument.c \
 		prepare_for_simulation.c \
 		start_simulation.c \
+		manage_processes.c \
 		simulation.c \
 		print_message.c \
 		clean.c \

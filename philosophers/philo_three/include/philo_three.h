@@ -6,7 +6,7 @@
 /*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 16:20:50 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/05 17:07:45 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 18:01:31 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int					sleeping(t_philosopher *philo);
 int					thinking(t_philosopher *philo);
 int					taking_fork(t_philosopher *philo);
 void				print_message(t_philosopher *philo, int time);
+void				manage_processes(t_table *table, t_philosopher *philos);
+void				*stop_everyone_eat_all(void *philosopher);
+void				*stop_when_died(void *philosopher);
 
 void				clean_after_simulation(t_table *table,
 												t_philosopher *philo);
