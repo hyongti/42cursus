@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 16:20:50 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/04 18:04:55 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 10:04:15 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 # define NO_ONE_DIED 2
 # define SOMEONE_DIED 3
 
-# define EATING 4
-# define SLEEPING 5
-# define THINKING 6
-# define DEAD 7
+# define TAKING_FORK 4
+# define EATING 5
+# define SLEEPING 6
+# define THINKING 7
+# define DEAD 8
 
 typedef struct		s_table
 {
@@ -40,7 +41,7 @@ typedef struct		s_table
 	int				count_eat_all;
 	int				starting_time;
 	int				check_anyone_dead;
-	pthread_mutex_t	not_twisted_msg;
+	pthread_mutex_t	for_not_twisted_msg;
 	pthread_mutex_t	*fork;
 }					t_table;
 
@@ -73,6 +74,7 @@ void				start_simulation(t_table *table,
 										t_philosopher *philosopher);
 void				*simulation(void *philosopher);
 void				*check_anyone_dead(void *philo);
+int					taking_fork(t_philosopher *philo);
 int					eating(t_philosopher *philo);
 int					sleeping(t_philosopher *philo);
 int					thinking(t_philosopher *philo);

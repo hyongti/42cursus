@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 18:03:04 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/04 18:08:16 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 08:03:30 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	clean_after_simulation(t_table *table, t_philosopher *philo)
 	i = -1;
 	while (++i < table->num_of_philosophers)
 		pthread_mutex_destroy(&table->fork[i]);
-	pthread_mutex_destroy(&table->not_twisted_msg);
+	pthread_mutex_destroy(&table->for_not_twisted_msg);
 	free(table->fork);
 	free(philo);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_for_simulation.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonkim <hyeonkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hyeonkim <hyeonkim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:14:06 by hyeonkim          #+#    #+#             */
-/*   Updated: 2021/04/04 17:49:47 by hyeonkim         ###   ########.fr       */
+/*   Updated: 2021/04/05 08:02:55 by hyeonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void		init_table(t_table *table, t_philosopher **philo)
 	table->starting_time = get_time();
 	table->count_eat_all = 0;
 	table->check_anyone_dead = 0;
-	pthread_mutex_init(&table->not_twisted_msg, NULL);
+	pthread_mutex_init(&table->for_not_twisted_msg, NULL);
 }
