@@ -3,15 +3,20 @@
 
 # include <iostream>
 # include <string>
+# include <iomanip>
 
-class Contact
+class contact
 {
 private:
-	std::string	Information[11];
+	std::string	information[11];
+	static std::string infoname[11];
 public:
-	Contact();
-	~Contact();
-	
+	// contact();
+	// ~contact();
+	void		InputInfo(void);
+	void		SearchInfo(void);
+	void		PreviewInfo(void);
+	void		ViewInfo(void);
 };
 
 #endif
