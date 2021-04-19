@@ -19,6 +19,7 @@ void	phonebook::AddContact(void)
 	}
 	else
 	{
+		std::cout << "----------------Add Contact----------------" << std::endl;
 		contact[num].InputInfo();
 		++num;
 	}
@@ -26,9 +27,9 @@ void	phonebook::AddContact(void)
 
 void	phonebook::SearchContact()
 {
-	int	idx;
-	std::string str;
+	std::string idx_str;
 
+	std::cout << "--------------Search  Contact--------------" << std::endl;
 	std::cout << "     index|first name| last name|  nickname" << std::endl;
 	for (int i = 0; i < num; i++)
 	{
@@ -36,21 +37,20 @@ void	phonebook::SearchContact()
 		std::cout << std::setw(10) << i << "|";
 		contact[i].PreviewInfo();
 	}
+	std::cout << "-------------------------------------------" << std::endl;
 	std::cout << "write index : ";
-	std::getline(std::cin, str);
-	idx = atoi(str.c_str());
+	std::getline(std::cin, idx_str);
 	if (std::cin.eof())
 		exit(-1);
-	if (idx < 0 || idx >= num || std::cin.fail())
+	else if (idx_str[0] >= '0' && idx_str[0] <= '9' && idx_str[1] == '\0')
 	{
-		std::cout << "wrong index" << std::endl;
-		std::cin.clear();
+		if (atoi(idx_str.c_str()) > num - 1)
+			std::cout << "wrong index" << std::endl;
+		else
+			contact[atoi(idx_str.c_str())].ViewInfo();
 	}
 	else
-	{
-		contact[idx].ViewInfo();
-		std::cin.clear();
-	}
+		std::cout << "wrong index" << std::endl;
 }
 
 void	phonebook::PrintError(void)
