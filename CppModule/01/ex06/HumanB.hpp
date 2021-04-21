@@ -6,19 +6,13 @@
 class HumanB
 {
 private:
-	Weapon	weapon;
+	std::string name;
+	Weapon		*weapon;
 public:
-	HumanB(/* args */);
+	HumanB(std::string name);
 	~HumanB();
+	void	setWeapon(Weapon &weapon);
+	void	attack(void);
 };
-
-HumanB::HumanB(/* args */)
-{
-}
-
-HumanB::~HumanB()
-{
-}
-
 
 # endif
