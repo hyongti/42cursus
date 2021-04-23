@@ -9,8 +9,6 @@ private:
 	int			num;
 	contact		contact[8];
 public:
-	// phonebook();
-	// ~phonebook();
 	void		PrintWelcome(void);
 	void		PrintPrompt(void);
 	void		AddContact(void);

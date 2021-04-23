@@ -2,12 +2,15 @@
 
 void	phonebook::PrintWelcome(void)
 {
-	std::cout << "* * * *  My Awesome PhoneBook  * * * *" << std::endl;
+	std::cout << "* * * * *  My  Awesome PhoneBook  * * * * *" << std::endl;
+	std::cout << "----------------Add Contact----------------" << std::endl;
 }
 
 void	phonebook::PrintPrompt(void)
 {
-	std::cout << "Enter your command [ADD, SEARCH, EXIT]" << std::endl;
+	if (std::cin.eof())
+		return ;
+	std::cout << "---Enter your command[ADD, SEARCH, EXIT]---" << std::endl;
 }
 
 void	phonebook::AddContact(void)
@@ -55,7 +58,9 @@ void	phonebook::SearchContact()
 
 void	phonebook::PrintError(void)
 {
-	std::cout << "wrong command, you can write ADD, SEARCH, EXIT\n" << std::endl;
+	std::cout << "**********************************************" << std::endl;
+	std::cout << "wrong command, you can write ADD, SEARCH, EXIT" << std::endl;
+	std::cout << "**********************************************" << std::endl;
 }
 
 void	phonebook::PrintExit(void)

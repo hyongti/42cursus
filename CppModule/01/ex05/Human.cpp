@@ -1,6 +1,6 @@
 #include "Human.hpp"
 
-const Brain		&Human::getBrain(void) const
+const Brain&	Human::getBrain(void) const
 {
 	return (this->brain);
 }

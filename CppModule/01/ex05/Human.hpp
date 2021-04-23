@@ -9,7 +9,7 @@ private:
 	const Brain	brain;
 public:
 	std::string	identify(void) const;
-	const Brain	&getBrain(void) const;
+	const Brain&	getBrain(void) const;
 };
 
 #endif

@@ -22,6 +22,8 @@ void			contact::InputInfo(void)
 		std::cout.setf(std::ios::left);
 		std::cout << std::setw(15) << infoname[i] << " : ";
 		std::getline(std::cin, information[i]);
+		if (std::cin.eof())
+			return ;
 	}
 }
 

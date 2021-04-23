@@ -11,8 +11,6 @@ private:
 	std::string	information[11];
 	static std::string infoname[11];
 public:
-	// contact();
-	// ~contact();
 	void		InputInfo(void);
 	void		SearchInfo(void);
 	void		PreviewInfo(void);
