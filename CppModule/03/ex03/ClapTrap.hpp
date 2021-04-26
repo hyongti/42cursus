@@ -22,7 +22,7 @@ public:
 	~ClapTrap();
 	ClapTrap	&operator=(const ClapTrap &rvalue);
 
-	std::string		getName(const ClapTrap &original);
+	std::string	getName(void);
 	unsigned int	rangedAttack(std::string const &target);
 	unsigned int	meleeAttack(std::string const &target);
 	void	OutputInRed(std::string name);

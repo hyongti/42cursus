@@ -22,9 +22,9 @@ ScavTrap::ScavTrap(): ClapTrap()
 	_meleeAttackDamage = 20;
 	_rangedAttackDamage = 15;
 	_armorDamageReduction = 3;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... ScavTrap[";
 	OutputInGreen(_name);
-	std::cout << "(driven) was created" << std::endl;
+	std::cout << "](driven) was created" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name)
@@ -37,17 +37,17 @@ ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 	_meleeAttackDamage = 20;
 	_rangedAttackDamage = 15;
 	_armorDamageReduction = 3;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... ScavTrap[";
 	OutputInGreen(_name);
-	std::cout << "(driven) was created" << std::endl;
+	std::cout << "](driven) was created" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &original): ClapTrap(original._name)
 {
 	*this = original;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... ScavTrap[";
 	OutputInGreen(original._name);
-	std::cout << "(driven) was created" << std::endl;
+	std::cout << "](driven) was created" << std::endl;
 }
 
 ScavTrap&	ScavTrap::operator=(const ScavTrap &original)
@@ -66,9 +66,9 @@ ScavTrap&	ScavTrap::operator=(const ScavTrap &original)
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "pop!!! ";
+	std::cout << "pop!!! ScavTrap[";
 	OutputInGreen(_name);
-	std::cout << "(driven) was destroyed" << std::endl;
+	std::cout << "](driven) was destroyed" << std::endl;
 }
 
 void	ScavTrap::ChallengeNewcomer(void)

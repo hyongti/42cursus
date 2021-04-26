@@ -1,24 +1,16 @@
-#include "FragTrap.hpp"
+#include "ClapTrap.hpp"
 
-std::string	FragTrap::skillset[5] = {
-	"Drop the Hammer",
-	"Coinsidental Combustion",
-	"Hyperion Punch",
-	"Repulsive",
-	"Second Wind"
-};
-
-void	FragTrap::OutputInRed(std::string name)
+void	ClapTrap::OutputInRed(std::string name)
 {
 	std::cout << "\033[1;31m" << name << "\033[0m";
 }
 
-void	FragTrap::OutputInGreen(std::string name)
+void	ClapTrap::OutputInGreen(std::string name)
 {
 	std::cout << "\033[1;32m" << name << "\033[0m";
 }
 
-FragTrap::FragTrap()
+ClapTrap::ClapTrap()
 {
 	srand(time(NULL));
 	for(int i = 0; i < 8; i++)
@@ -31,12 +23,12 @@ FragTrap::FragTrap()
 	_meleeAttackDamage = 30;
 	_rangedAttackDamage = 20;
 	_armorDamageReduction = 5;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... ClapTrap[";
 	OutputInGreen(_name);
-	std::cout << " was created" << std::endl;
+	std::cout << "](base) was created" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name): _name(name)
+ClapTrap::ClapTrap(std::string name): _name(name)
 {
 	_hitPoints = 100;
 	_maxHitPoints = 100;
@@ -46,20 +38,20 @@ FragTrap::FragTrap(std::string name): _name(name)
 	_meleeAttackDamage = 30;
 	_rangedAttackDamage = 20;
 	_armorDamageReduction = 5;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... ClapTrap[";
 	OutputInGreen(_name);
-	std::cout << " was created" << std::endl;
+	std::cout << "](base) was created" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &original)
+ClapTrap::ClapTrap(const ClapTrap &original)
 {
 	*this = original;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... ClapTrap[";
 	OutputInGreen(original._name);
-	std::cout << " was created" << std::endl;
+	std::cout << "](base) was created" << std::endl;
 }
 
-FragTrap&	FragTrap::operator=(const FragTrap &original)
+ClapTrap&	ClapTrap::operator=(const ClapTrap &original)
 {
 	this->_name = original._name;
 	this->_hitPoints = original._hitPoints;
@@ -73,19 +65,19 @@ FragTrap&	FragTrap::operator=(const FragTrap &original)
 	return (*this);
 }
 
-FragTrap::~FragTrap(void)
+ClapTrap::~ClapTrap(void)
 {
-	std::cout << "pop!!! ";
+	std::cout << "pop!!! ClapTrap[";
 	OutputInGreen(_name);
-	std::cout << " was destroyed" << std::endl;
+	std::cout << "](base) was destroyed" << std::endl;
 }
 
-std::string		FragTrap::getName(const FragTrap &original)
+std::string		ClapTrap::getName()
 {
-	return (original._name);
+	return (_name);
 }
 
-unsigned int	FragTrap::rangedAttack(std::string const& target)
+unsigned int	ClapTrap::rangedAttack(std::string const& target)
 {
 	OutputInGreen(_name);
 	std::cout << " attacks ";
@@ -95,7 +87,7 @@ unsigned int	FragTrap::rangedAttack(std::string const& target)
 	return (_rangedAttackDamage);
 }
 
-unsigned int	FragTrap::meleeAttack(std::string const& target)
+unsigned int	ClapTrap::meleeAttack(std::string const& target)
 {
 	OutputInGreen(_name);
 	std::cout << " attacks ";
@@ -105,7 +97,7 @@ unsigned int	FragTrap::meleeAttack(std::string const& target)
 	return (_meleeAttackDamage);
 }
 
-void	FragTrap::takeDamage(unsigned int amount)
+void	ClapTrap::takeDamage(unsigned int amount)
 {
 	int	damage = amount - _armorDamageReduction;
 
@@ -135,7 +127,7 @@ void	FragTrap::takeDamage(unsigned int amount)
 	
 }
 
-void	FragTrap::beRepaired(unsigned int amount)
+void	ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_hitPoints + (int)amount >= _maxHitPoints)
 		_hitPoints = _maxHitPoints;
@@ -145,26 +137,14 @@ void	FragTrap::beRepaired(unsigned int amount)
 	std::cout << " was repaired (HP: " << _hitPoints << ")\n" << std::endl;  
 }
 
-unsigned int	FragTrap::vaulthunter_dot_exe(std::string const & target)
+void	ClapTrap::showData(void)
 {
-	unsigned int	skillDamage[5] = {10, 15, 20, 25, 30};
-	
-	if (_energyPoints >= 25)
-	{
-		_energyPoints -= 25;
-		int	index = rand() % 5;
-		OutputInGreen(_name);
-		std::cout << " attacks ";
-		OutputInRed(target);
-		std::cout << " by " << skillset[index] << " causing "
-			<< skillDamage[index] << " points of damage (EP: " << _energyPoints
-			<< ")" << std::endl;
-		return (skillDamage[index]);
-	}
-	else
-	{
-		OutputInGreen(_name);
-		std::cout << " has not enough energy (EP: 0)" << std::endl;
-		return (0);
-	}
+	std::cout << "====" << this->_name << "====" << std::endl;
+	std::cout << this->_hitPoints << std::endl;
+	std::cout << this->_maxHitPoints << std::endl;
+	std::cout << this->_energyPoints << std::endl;
+	std::cout << this->_maxEnergyPoints << std::endl;
+	std::cout << this->_meleeAttackDamage << std::endl;
+	std::cout << this->_rangedAttackDamage << std::endl;
+	std::cout << this->_armorDamageReduction << std::endl;
 }

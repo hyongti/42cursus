@@ -22,9 +22,9 @@ FragTrap::FragTrap(): ClapTrap()
 	_meleeAttackDamage = 30;
 	_rangedAttackDamage = 20;
 	_armorDamageReduction = 5;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... FragTrap[";
 	OutputInGreen(_name);
-	std::cout << "(driven) was created" << std::endl;
+	std::cout << "](driven) was created" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name): ClapTrap(name)
@@ -37,17 +37,17 @@ FragTrap::FragTrap(std::string name): ClapTrap(name)
 	_meleeAttackDamage = 30;
 	_rangedAttackDamage = 20;
 	_armorDamageReduction = 5;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... FragTrap[";
 	OutputInGreen(_name);
-	std::cout << "(driven) was created" << std::endl;
+	std::cout << "](driven) was created" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &original): ClapTrap(original._name)
 {
 	*this = original;
-	std::cout << "BbbBbBBBb... ";
+	std::cout << "BbbBbBBBb... FragTrap[";
 	OutputInGreen(original._name);
-	std::cout << "(driven) was created" << std::endl;
+	std::cout << "](driven) was created" << std::endl;
 }
 
 FragTrap&	FragTrap::operator=(const FragTrap &original)
@@ -66,9 +66,9 @@ FragTrap&	FragTrap::operator=(const FragTrap &original)
 
 FragTrap::~FragTrap(void)
 {
-	std::cout << "pop!!! ";
+	std::cout << "pop!!! FragTrap[";
 	OutputInGreen(_name);
-	std::cout << "(driven) was destroyed" << std::endl;
+	std::cout << "](driven) was destroyed" << std::endl;
 }
 
 unsigned int	FragTrap::vaulthunter_dot_exe(std::string const & target)
