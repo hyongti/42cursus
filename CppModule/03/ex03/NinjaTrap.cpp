@@ -70,6 +70,7 @@ void NinjaTrap::meleeAttack(std::string const &target)
 
 void NinjaTrap::rangedAttack(std::string const &target)
 {
+	OutputInGreen(_name);
 	std::cout << " throw a Shuriken at "
 			<< target << " and deals " << _meleeAttackDamage
 			<< " points of damage!" << std::endl;
