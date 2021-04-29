@@ -13,7 +13,7 @@ std::string	Replace::ReplaceStr(const std::string &filename, const std::string &
 	std::ifstream	input;
 	std::ofstream	output;
 	std::string		line;
-	std::size_t		pos;
+	std::size_t		pos = 0;
 
 	if (filename.length() == 0 || from.length() == 0 || to.length() == 0)
 		return ("Empty Argument");
@@ -27,10 +27,12 @@ std::string	Replace::ReplaceStr(const std::string &filename, const std::string &
 		{
 			while (true)
 			{
-				pos = line.find(from);
+				// ab를 abc로 바꾸는 경우 무한루프(./replace abc ab abc)
+				pos = line.find(from, pos);
 				if (pos == std::string::npos)
 					break;
 				line.replace(line.find(from), from.length(), to);
+				pos += to.length();
 			}
 			output << line;
 			if (!input.eof())
