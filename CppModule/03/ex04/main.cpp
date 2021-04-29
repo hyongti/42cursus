@@ -34,8 +34,8 @@ int		main(void)
 	}
 
 	std::cout<<"\n===== ninjaShoebox attack! =====\n\n";
-	ClapTrap    mijeong("mijeong");
-	FragTrap    ukim("ukim");
+	ClapTrap	mijeong("mijeong");
+	FragTrap	ukim("ukim");
 	hyeonkim.ninjaShoebox(mijeong);
 	hyeonkim.ninjaShoebox(ukim);
 	std::cout<<"\n=================================\n\n";
