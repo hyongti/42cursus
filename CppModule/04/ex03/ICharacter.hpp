@@ -1,8 +1,10 @@
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
 
-# include "AMateria.hpp"
 # include <iostream>
+# include "AMateria.hpp"
+
+class AMateria; // 흑흑 이걸 선언해줘야 함 ㅠㅠ
 
 class ICharacter
 {

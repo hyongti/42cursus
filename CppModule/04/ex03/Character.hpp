@@ -1,12 +1,14 @@
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
-#include "ICharacter.hpp"
+#include "AMateria.hpp"
 
 class Character: public ICharacter
 {
 private:
-	std::string	name;
+	std::string	_name;
+	int			_equipped;
+	AMateria	*_inventory[4];
 public:
 	Character();
 	Character(std::string name);
