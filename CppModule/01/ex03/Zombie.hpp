@@ -10,8 +10,9 @@ private:
 	std::string	name;
 	std::string	type;
 public:
+	Zombie();
 	~Zombie();
-	void	InitZombie(std::string name, std::string type);
+	void	initZombie(std::string name, std::string type);
 	void	announce(void);
 };
 

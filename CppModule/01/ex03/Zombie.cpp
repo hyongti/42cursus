@@ -1,6 +1,11 @@
 #include "Zombie.hpp"
 
-void	Zombie::InitZombie(std::string name, std::string type)
+Zombie::Zombie()
+{
+	std::cout << "Zombie constructor is called" << std::endl;
+}
+
+void	Zombie::initZombie(std::string name, std::string type)
 {
 	std::cout << "Zombie constructor is called" << std::endl;
 	this->name = name;

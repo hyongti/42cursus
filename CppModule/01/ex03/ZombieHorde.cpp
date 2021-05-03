@@ -2,6 +2,8 @@
 
 ZombieHorde::ZombieHorde(int N)
 {
+	if (N < 0)
+		N = 0;
 	this->n = N;
 	zombie = new Zombie[n];
 
@@ -9,16 +11,16 @@ ZombieHorde::ZombieHorde(int N)
 
 	int			index;
 	srand(time(NULL));
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < this->n; i++)
 	{
 		index = rand() % 8;
-		zombie[i].InitZombie(NameList[index], "cadet");
+		zombie[i].initZombie(NameList[index], "cadet");
 	}
 }
 
 void	ZombieHorde::announce(void)
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < this->n; i++)
 		zombie[i].announce();
 }
 
