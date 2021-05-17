@@ -19,14 +19,14 @@ char	randomAlnum()
 void	*serialize(void)
 {
 	char	*ptr = new char[20];
-
+	
 	for(int i = 0; i < 8; i++)
 	{
 		ptr[i] = randomAlnum();
 		ptr[i + 12] = randomAlnum();
 	}
-
 	*reinterpret_cast<int*>(ptr + 8) = std::rand();
+	std::cout << "serialized\n" << ptr << std::endl << std::endl;
 	return static_cast<void*>(ptr);
 }
 
@@ -44,6 +44,7 @@ int main(void)
 	char	*ptr = static_cast<char*>(serialize());
 	Data	*des = deserialize(ptr);
 
+	std::cout << "deserialized\n";
 	std::cout << des->s1 << std::endl;
 	std::cout << des->n << std::endl;
 	std::cout << des->s2 << std::endl;
