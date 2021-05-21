@@ -48,6 +48,5 @@ int main(void)
 	std::cout << des->s1 << std::endl;
 	std::cout << des->n << std::endl;
 	std::cout << des->s2 << std::endl;
-
 	delete des;
 }

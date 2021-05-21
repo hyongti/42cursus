@@ -66,16 +66,16 @@ void		Convert::checkValidInput(void)
 
 void		Convert::toChar(void)
 {
-	int		checkInt;
+	double		checkInt;
 
-	checkInt = static_cast<int>(this->atofInput);
+	checkInt = static_cast<double>(this->atofInput);
 	std::cout << "char: ";
 	try {
 		if (this->atofInput - checkInt != 0)
 			throw Convert::ImpossibleException();
 		if (!(this->atofInput >= 32 && this->atofInput <= 126))
 			throw Convert::NonDisplayableException();
-		std::cout << static_cast<char>(this->atofInput) << std::endl;
+		std::cout << "'" << static_cast<char>(this->atofInput) << "'" << std::endl;
 	}
 	catch(std::exception& e)
 	{
@@ -89,6 +89,8 @@ void		Convert::toInt(void)
 	try {
 		if (this->atofInput > INT_MAX || this->atofInput < INT_MIN)
 			throw Convert::ImpossibleException();
+		else if (isnan(this->atofInput) || isinf(this->atofInput))
+			throw Convert::ImpossibleException();
 		std::cout << static_cast<int>(this->atofInput) << std::endl;
 	}
 	catch(std::exception& e)
@@ -99,30 +101,35 @@ void		Convert::toInt(void)
 
 void		Convert::toFloat(void)
 {
-	int		checkInt;
+	long long		checkInt;
 
-	checkInt = static_cast<int>(this->atofInput);
+	checkInt = static_cast<long long>(this->atofInput);
 	std::cout << "float: ";
 	if (isnan(this->atofInput) || isinf(this->atofInput))
 		std::cout << this->atofInput << std::endl;
 	else if (checkInt - this->atofInput == 0)
-		std::cout << this->atofInput << ".0f" << std::endl;
+	{
+		if (this->atofInput < 1000000)
+			std::cout << this->atofInput << ".0f" << std::endl;
+		else
+			std::cout << this->atofInput << "f" << std::endl;
+	}
 	else
 		std::cout << this->atofInput << "f" << std::endl;
 }
 
 void		Convert::toDouble(void)
 {
-	int		checkInt;
+	long long		checkInt;
 
-	checkInt = static_cast<int>(this->atofInput);
+	checkInt = static_cast<long long>(this->atofInput);
 	std::cout << "double: ";
 	if (isnan(this->atofInput) || isinf(this->atofInput))
 		std::cout << this->atofInput << std::endl;
 	else
 	{
 		std::cout << this->atofInput;
-		if (checkInt - this->atofInput == 0)
+		if (checkInt - this->atofInput == 0 && this->atofInput < 1000000)
 			std::cout << ".0";
 		std::cout << std::endl;
 	}

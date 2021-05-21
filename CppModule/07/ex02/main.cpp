@@ -28,6 +28,7 @@ int main()
 	}catch (std::exception &e){
 		std::cout << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
 	// const 객체에도 인덱스 접근은 가능
 	// const 객체를 반환하는 []연산자 오버로딩을 하지않으면 에러남 

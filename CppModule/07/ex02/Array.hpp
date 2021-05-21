@@ -37,7 +37,13 @@ public:
 			_arr[i] = ref._arr[i];
 		return *this;
 	}
-	T	&operator[](unsigned int idx) const
+	T	&operator[](unsigned int idx)
+	{
+		if (idx >= _size)
+			throw OutOfRangeException();
+		return (_arr[idx]);
+	}
+	const T	&operator[](unsigned int idx) const
 	{
 		if (idx >= _size)
 			throw OutOfRangeException();
